@@ -14,27 +14,7 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1><a href="">MySite</a></h1>
-
-			<c:choose>
-				<c:when test="${sessionScope.authUser == null }">			
-					<ul>
-						<li><a href="">로그인</a></li>
-						<li><a href="">회원가입</a></li>
-					</ul>
-				</c:when>
-				
-				<c:otherwise>
-					<ul>
-						<li>${sessionScope.authUser.name }님 안녕하세요^^</li>
-						<li><a href="">로그아웃</a></li>
-						<li><a href="">회원정보수정</a></li>
-					</ul>
-				</c:otherwise>
-			</c:choose>
-			
-		</div>
+		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<!-- //header -->
 
 		<div id="nav">
@@ -88,9 +68,7 @@
 		<!-- //full-content -->
 		<div class="clear"></div>
 		
-		<div id="footer">
-			Copyright ⓒ 2020 양지선. All right reserved
-		</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>

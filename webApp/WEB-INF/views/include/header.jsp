@@ -12,7 +12,7 @@
 			<ul>
 				<li><a
 					href="${pageContext.request.contextPath }/user/loginForm">로그인</a></li>
-				<li><a href="${pageContext.request.contextPath }/user/joinFrom">회원가입</a></li>
+				<li><a href="${pageContext.request.contextPath }/user/joinForm">회원가입</a></li>
 			</ul>
 		</c:when>
 
@@ -20,7 +20,7 @@
 			<ul>
 				<li>${sessionScope.authUser.name }님안녕하세요^^</li>
 				<li><a href="${pageContext.request.contextPath }/user/logOut">로그아웃</a></li>
-				<li><a href="">회원정보수정</a></li>
+				<li><a href="${pageContext.request.contextPath }/user/modifyForm">회원정보수정</a></li>
 			</ul>
 		</c:otherwise>
 	</c:choose>

@@ -17,25 +17,10 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		<!-- //header -->
 
-		<div id="nav">
-			<ul>
-				<li><a href="">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
 		<!-- //nav -->
 
-		<div id="aside">
-			<h2>회원</h2>
-			<ul>
-				<li>회원정보</li>
-				<li>로그인</li>
-				<li>회원가입</li>
-			</ul>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/aside.jsp"></jsp:include>
 		<!-- //aside -->
 
 		<div id="content">
@@ -60,7 +45,7 @@
 						<!-- 아이디 -->
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
-							<span class="text-large bold">userid</span>
+							<span class="text-large bold">${sessionScope.authUser.id }</span>
 						</div>
 
 						<!-- 비밀번호 -->
@@ -72,19 +57,28 @@
 						<!-- 이메일 -->
 						<div class="form-group">
 							<label class="form-text" for="input-name">이름</label> 
-							<input type="text" id="input-name" name="" value="" placeholder="이름을 입력하세요">
+							<input type="text" id="input-name" name="name" value="${sessionScope.authUser.name }" placeholder="이름을 입력하세요">
 						</div>
 
 						<!-- //나이 -->
 						<div class="form-group">
 							<span class="form-text">성별</span> 
 							
-							<label for="rdo-male">남</label> 
-							<input type="radio" id="rdo-male" name="" value="" > 
+							<c:if test="${sessionScope.authUser.gender eq 'male' }">
+								<label for="rdo-male">남</label> 
+								<input type="radio" id="rdo-male" name="gender" value="male" checked = "checked" > 
+								
+								<label for="rdo-female">여</label> 
+								<input type="radio" id="rdo-female" name="gender" value="female" > 
+							</c:if>
 							
-							<label for="rdo-female">여</label> 
-							<input type="radio" id="rdo-female" name="" value="" > 
-
+							<c:if test="${sessionScope.authUser.gender eq 'female' }">
+								<label for="rdo-male">남</label> 
+								<input type="radio" id="rdo-male" name="gender" value="male"  > 
+								
+								<label for="rdo-female">여</label> 
+								<input type="radio" id="rdo-female" name="gender" value="female" checked = "checked"> 
+							</c:if>
 						</div>
 
 						<!-- 버튼영역 -->

@@ -46,4 +46,7 @@ public class BoardDao {
 		
 		return bList;
 	}
+	public int keywordAllPage(String keyword) {
+		return sqlSession.selectOne("board.keywordAllPage", keyword);
+	}
 }

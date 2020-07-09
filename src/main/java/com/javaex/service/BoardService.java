@@ -54,5 +54,8 @@ public class BoardService {
 		List<BoardVo> bList = boardDao.search(pageMap);
 		return bList;
 	}
+	public int keywordAllPage(String keyword) {
+		return boardDao.keywordAllPage(keyword);
+	}
 	
 }

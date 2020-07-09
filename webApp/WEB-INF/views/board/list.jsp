@@ -83,11 +83,23 @@
 							<c:forEach var="item" begin="${requestScope.pg.page_Start }" end="${requestScope.pg.page_End}" >
 									
 									<c:if test="${param.pg eq item}">
+										<c:if test="${empty param.keyword}">
 										<li class="active"><a href="${pageContext.request.contextPath }/board/list?pg=${item }"><c:out value="${item }"/></a></li>
+										</c:if>
+										
+										<c:if test="${!empty param.keyword}">
+										<li class="active"><a href="${pageContext.request.contextPath }/board/list?pg=${item }&keyword=${param.keyword}"><c:out value="${item }"/></a></li>
+										</c:if>
 									</c:if>
 									 
 									<c:if test="${param.pg != item }">
-									<li><a href="${pageContext.request.contextPath }/board/list?pg=${item }"><c:out value="${item }"/></a></li>
+										<c:if test="${empty param.keyword}">
+											<li><a href="${pageContext.request.contextPath }/board/list?pg=${item }"><c:out value="${item }"/></a></li>
+										</c:if>
+										
+										<c:if test="${!empty param.keyword}">
+											<li><a href="${pageContext.request.contextPath }/board/list?pg=${item }&keyword=${param.keyword}"><c:out value="${item }"/></a></li>
+										</c:if>
 									</c:if>
 									
 							</c:forEach>

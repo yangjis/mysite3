@@ -97,6 +97,11 @@
 			where rn >= #{start} and rn <= #{end}
 		]]>
 	</select>
-
+	
+	<select id="keywordAllPage" resultType = "int" parameterType="String">
+		<![CDATA[
+			select count(*) count from board where title LIKE '%'||#{keyword}||'%'
+		]]>
+	</select>
 
 </mapper>

@@ -73,7 +73,7 @@ public class BoardController {
 	public String search(@RequestParam("keyword") String keyword,
 						 @RequestParam("pg") int pg,
 						 Model model) {
-		Paging pgVo = new Paging(5, 5, boardService.allPage(),pg);
+		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage(keyword),pg);
 		
 		List<BoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(),keyword);
 		

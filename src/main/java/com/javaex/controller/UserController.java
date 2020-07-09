@@ -78,12 +78,22 @@ public class UserController {
 	
 	@RequestMapping("/modify")
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
-		userService.updateUser(userVo);
-		UserVo authUser = userService.login(userVo);
+		System.out.println("userController.modify");
 		
-		session.removeAttribute("authUser");
-		session.setAttribute("authUser", authUser);
-		
-		return "redirect:/main";
+		if(!userVo.getPassword().isEmpty()) {
+			UserVo vo = (UserVo)session.getAttribute("authUser");
+			userVo.setNo(vo.getNo());
+			
+			userService.updateUser(userVo);
+			
+			UserVo authUser = userService.login(userVo);
+			
+			session.removeAttribute("authUser");
+			session.setAttribute("authUser", authUser);
+			
+			return "redirect:/main";
+		}else {
+			return "redirect:/user/modifyForm?result=fail";
+		}
 	}
 }

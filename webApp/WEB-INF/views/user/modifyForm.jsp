@@ -44,12 +44,14 @@
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
 							<span class="text-large bold">${requestScope.authUser.id }</span>
+							<input type = "hidden" name="id" value=${requestScope.authUser.id}>
 						</div>
 
 						<!-- 비밀번호 -->
 						<div class="form-group">
 							<label class="form-text" for="input-pass">패스워드</label> 
 							<input type="password" id="input-pass" name="password" placeholder="비밀번호를 입력하세요"	>
+					
 						</div>
 
 						<!-- 이메일 -->
@@ -78,15 +80,16 @@
 								<input type="radio" id="rdo-female" name="gender" value="female" checked = "checked"> 
 							</c:if>
 						</div>
-
+						<c:if test="${param.result eq 'fail' }">
+								<p>비밀번호를 입력해주세요.</p>
+						</c:if>
 						<!-- 버튼영역 -->
 		                <div class="button-area">
 		                    <button type="submit" id="btn-submit">회원정보수정</button>
 		                </div>
 						
 					</form>
-				
-				
+						
 				</div>
 				<!-- //modifyForm -->
 			</div>

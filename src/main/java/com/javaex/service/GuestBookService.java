@@ -18,8 +18,12 @@ public class GuestBookService {
 		System.out.println("guestService.addList");
 		List<GuestBookVo> gList = guestDao.addList();
 		
-		System.out.println(gList.toString()+"여기");
-		
 		return gList;
+	}
+	
+	public int addGuestBook(GuestBookVo vo) {
+		System.out.println("gService.addGuestBook");
+		
+		return guestDao.addGuestBook(vo);
 	}
 }

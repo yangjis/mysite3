@@ -11,5 +11,11 @@
 			from guestBook
 		]]>
 	</select>
+	
+	<insert id="addGuestBook" parameterType = "com.javaex.vo.GuestBookVo">
+		<![CDATA[
+			insert into guestBook values(SEQ_GUEST_NO.nextval, #{name}, #{password}, #{content},sysdate)
+		]]>
+	</insert>
 
 </mapper>

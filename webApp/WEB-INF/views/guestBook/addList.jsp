@@ -39,7 +39,7 @@
             <!-- //content-head -->
 
 			<div id="guestbook">
-				<form action="" method="">
+				<form action="${pageContext.request.contextPath }/guestBook/addGuestBook" method="get">
 					<table id="guestAdd">
 						<colgroup>
 							<col style="width: 70px;">
@@ -52,7 +52,7 @@
 								<th><label class="form-text" for="input-uname">이름</label></td>
 								<td><input id="input-uname" type="text" name="name"></td>
 								<th><label class="form-text" for="input-pass">패스워드</label></td>
-								<td><input id="input-pass"type="password" name="pass"></td>
+								<td><input id="input-pass"type="password" name="password"></td>
 							</tr>
 							<tr>
 								<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>

@@ -20,4 +20,10 @@ public class GuestBookDao {
 		
 		return gList;
 	}
+	
+	public int addGuestBook(GuestBookVo vo) {
+		System.out.println("guestDao.addGuestBook");
+		
+		return sqlSession.insert("guest.addGuestBook", vo);
+	}
 }

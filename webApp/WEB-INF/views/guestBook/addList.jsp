@@ -67,8 +67,7 @@
 					<input type="hidden" name="action" value="add">
 					
 				</form>
-				<c:forEach var="vo" items="${requestScope.gList}" varStatus="status">
-
+				<c:forEach items="${requestScope.gList}" var="vo">
 				<table class="guestRead">
 					<colgroup>
 						<col style="width: 10%;">
@@ -77,16 +76,16 @@
 						<col style="width: 10%;">
 					</colgroup>
 					<tr>
-						<td>#{vo.no }</td>
-						<td>#{vo.name }</td>
-						<td>#{vo.reg_date }</td>
+						<td>${vo.no }</td>
+						<td>${vo.name }</td>
+						<td>${vo.reg_date }</td>
 						<td><a href="">[삭제]</a></td>
 					</tr>
 					<tr>
-						<td colspan=4 class="text-left"> #{vo.content }</td>
+						<td colspan=4 class="text-left"> ${vo.content }</td>
 					</tr>
 				</table>
-				</c:forEach>
+				</c:forEach> 
 				<!-- //guestRead -->
 				
 			</div>

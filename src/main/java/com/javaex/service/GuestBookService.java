@@ -26,4 +26,8 @@ public class GuestBookService {
 		
 		return guestDao.addGuestBook(vo);
 	}
+	
+	public int delete(GuestBookVo vo) {
+		return guestDao.delete(vo);
+	}
 }

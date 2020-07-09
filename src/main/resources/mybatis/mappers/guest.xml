@@ -17,5 +17,10 @@
 			insert into guestBook values(SEQ_GUEST_NO.nextval, #{name}, #{password}, #{content},sysdate)
 		]]>
 	</insert>
-
+	
+	<delete id="delete" parameterType="com.javaex.vo.GuestBookVo">
+		<![CDATA[
+		 	delete from guestbook where no = #{no} and password = #{password}
+		]]>
+	</delete>
 </mapper>

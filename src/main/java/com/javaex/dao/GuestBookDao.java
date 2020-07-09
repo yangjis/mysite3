@@ -26,4 +26,8 @@ public class GuestBookDao {
 		
 		return sqlSession.insert("guest.addGuestBook", vo);
 	}
+	
+	public int delete(GuestBookVo vo) {
+		return sqlSession.delete("guest.delete", vo);
+	}
 }

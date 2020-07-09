@@ -43,8 +43,7 @@
 						<!-- 아이디 -->
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
-							<span class="text-large bold">${sessionScope.authUser.id }</span>
-							<input type = "hidden" name = "id" value="${sessionScope.authUser.id }">
+							<span class="text-large bold">${requestScope.authUser.id }</span>
 						</div>
 
 						<!-- 비밀번호 -->
@@ -56,14 +55,14 @@
 						<!-- 이메일 -->
 						<div class="form-group">
 							<label class="form-text" for="input-name">이름</label> 
-							<input type="text" id="input-name" name = "name" value="${sessionScope.authUser.name }" placeholder="이름을 입력하세요">
+							<input type="text" id="input-name" name = "name" value="${requestScope.authUser.name }" placeholder="이름을 입력하세요">
 						</div>
 
 						<!-- //나이 -->
 						<div class="form-group">
 							<span class="form-text">성별</span> 
 							
-							<c:if test="${sessionScope.authUser.gender eq 'male' }">
+							<c:if test="${requestScope.authUser.gender eq 'male' }">
 								<label for="rdo-male">남</label> 
 								<input type="radio" id="rdo-male" name="gender" value="male" checked = "checked" > 
 								
@@ -71,14 +70,13 @@
 								<input type="radio" id="rdo-female" name="gender" value="female" > 
 							</c:if>
 							
-							<c:if test="${sessionScope.authUser.gender eq 'female' }">
+							<c:if test="${requestScope.authUser.gender eq 'female' }">
 								<label for="rdo-male">남</label> 
 								<input type="radio" id="rdo-male" name="gender" value="male"  > 
 								
 								<label for="rdo-female">여</label> 
 								<input type="radio" id="rdo-female" name="gender" value="female" checked = "checked"> 
 							</c:if>
-							<input type = "hidden" name="no" value="${sessionScope.authUser.no }">
 						</div>
 
 						<!-- 버튼영역 -->

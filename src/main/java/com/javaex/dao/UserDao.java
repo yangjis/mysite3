@@ -20,9 +20,9 @@ public class UserDao {
 		return count;
 	}
 	
-	public UserVo getUser(UserVo userVo) {
+	public UserVo login(UserVo userVo) {
 		System.out.println("userDao.login");
-		UserVo vo =sqlSession.selectOne("user.getUser", userVo);
+		UserVo vo =sqlSession.selectOne("user.login", userVo);
 		System.out.println(vo.toString());
 		
 		return vo;
@@ -32,6 +32,12 @@ public class UserDao {
 		System.out.println("userDao.updateUser");
 		
 		return sqlSession.update("user.updateUser", userVo);
+	}
+	
+	public UserVo getUser(int no) {
+		System.out.println("userDao.getUser");
+		
+		return sqlSession.selectOne("user.getUser", no);
 	}
 
 }

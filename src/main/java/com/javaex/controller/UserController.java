@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -65,15 +66,18 @@ public class UserController {
 	}
 
 	@RequestMapping("/modifyForm")
-	public String modifyForm(Model model) {
+	public String modifyForm(Model model, HttpSession session) {
+		System.out.println("userController.fodifyForm");
+		UserVo vo = (UserVo)session.getAttribute("authUser");
+		
+		UserVo authUser = userService.getUser(vo.getNo());
+		model.addAttribute("authUser", authUser);
 		
 		return "user/modifyForm";
 	}
 	
 	@RequestMapping("/modify")
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
-		System.out.println(userVo.toString());
-		
 		userService.updateUser(userVo);
 		UserVo authUser = userService.login(userVo);
 		

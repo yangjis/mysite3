@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>mysite3</title>
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/board.css" rel="stylesheet" type="text/css">
 
@@ -21,7 +21,7 @@
 		<jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
 		<!-- //nav -->
 
-		<jsp:include page="/WEB-INF/views/include/aside.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/include/asideBoard.jsp"></jsp:include>
 		<!-- //aside -->
 
 		<div id="content">
@@ -41,9 +41,10 @@
 
 			<div id="board">
 				<div id="list">
-					<form action="" method="">
+					<form action="${pageContext.request.contextPath }/board/search" method="get">
 						<div class="form-group text-right">
-							<input type="text">
+							<input type="text" name = "keyword">
+							<input type="hidden" name = "pg" value="1">
 							<button type="submit" id=btn_search>검색</button>
 						</div>
 					</form>
@@ -62,11 +63,15 @@
 							<c:forEach var="vo" items="${requestScope.bList}">
 							<tr>
 								<td>${vo.no }</td>
-								<td class="text-left"><a href="#">${vo.title }</a></td>
+								<td class="text-left"><a href="${pageContext.request.contextPath }/board/read?no=${vo.no}">${vo.title }</a></td>
 								<td> ${vo.name }</td>
 								<td> ${vo.hit }</td>
 								<td> ${vo.reg_date }</td>
-								<td><a href="">[삭제]</a></td>
+								<td>
+								<c:if test="${authUser.no eq vo.user_no}">
+									<a href="${pageContext.request.contextPath }/board/delete?no=${vo.no }&user_no=${vo.user_no}">[삭제]</a>
+								</c:if>
+								</td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -75,24 +80,26 @@
 					<div id="paging">
 						<ul>
 							<li><a href="">◀</a></li>
-							<li><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">4</a></li>
-							<li class="active"><a href="">5</a></li>
-							<li><a href="">6</a></li>
-							<li><a href="">7</a></li>
-							<li><a href="">8</a></li>
-							<li><a href="">9</a></li>
-							<li><a href="">10</a></li>
+							<c:forEach var="item" begin="${requestScope.pg.page_Start }" end="${requestScope.pg.page_End}" >
+									
+									<c:if test="${param.pg eq item}">
+										<li class="active"><a href="${pageContext.request.contextPath }/board/list?pg=${item }"><c:out value="${item }"/></a></li>
+									</c:if>
+									 
+									<c:if test="${param.pg != item }">
+									<li><a href="${pageContext.request.contextPath }/board/list?pg=${item }"><c:out value="${item }"/></a></li>
+									</c:if>
+									
+							</c:forEach>
 							<li><a href="">▶</a></li>
 						</ul>
 						
 						
 						<div class="clear"></div>
 					</div>
-					<a id="btn_write" href="">글쓰기</a>
-				
+					<c:if test="${authUser.no != null}">
+					<a id="btn_write" href="${pageContext.request.contextPath }/board/writeForm">글쓰기</a>
+					</c:if>
 				</div>
 				<!-- //list -->
 			</div>

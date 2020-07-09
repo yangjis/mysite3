@@ -8,17 +8,25 @@ public class BoardVo {
 	private int hit;
 	private String reg_date;
 	private int user_no;
+	private String name;
 	
 	public BoardVo() {}
-	public BoardVo(int no, String title, String content, int hit, String reg_date, int user_no) {
+	public BoardVo(int no, String title, String content, int hit, String reg_date, int user_no, String name) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;
 		this.reg_date = reg_date;
 		this.user_no = user_no;
+		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getNo() {
 		return no;
 	}

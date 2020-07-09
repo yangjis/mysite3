@@ -39,7 +39,8 @@
 		select no,
 			   id,
 			   name,
-			   gender
+			   gender,
+			   password
 		from users
 		where no = #{no}
 	]]>

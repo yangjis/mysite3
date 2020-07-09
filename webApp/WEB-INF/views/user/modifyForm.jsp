@@ -43,28 +43,28 @@
 						<!-- 아이디 -->
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
-							<span class="text-large bold">${requestScope.authUser.id }</span>
+							<span class="text-large bold">${getUser.id }</span>
 							<input type = "hidden" name="id" value=${requestScope.authUser.id}>
 						</div>
 
 						<!-- 비밀번호 -->
 						<div class="form-group">
 							<label class="form-text" for="input-pass">패스워드</label> 
-							<input type="password" id="input-pass" name="password" placeholder="비밀번호를 입력하세요"	>
+							<input type="password" id="input-pass" name="password" placeholder="비밀번호를 입력하세요"	 value="${getUser.password }">
 					
 						</div>
 
 						<!-- 이메일 -->
 						<div class="form-group">
 							<label class="form-text" for="input-name">이름</label> 
-							<input type="text" id="input-name" name = "name" value="${requestScope.authUser.name }" placeholder="이름을 입력하세요">
+							<input type="text" id="input-name" name = "name" value="${getUser.name }" placeholder="이름을 입력하세요">
 						</div>
 
 						<!-- //나이 -->
 						<div class="form-group">
 							<span class="form-text">성별</span> 
 							
-							<c:if test="${requestScope.authUser.gender eq 'male' }">
+							<c:if test="${getUser.gender eq 'male' }">
 								<label for="rdo-male">남</label> 
 								<input type="radio" id="rdo-male" name="gender" value="male" checked = "checked" > 
 								
@@ -72,7 +72,7 @@
 								<input type="radio" id="rdo-female" name="gender" value="female" > 
 							</c:if>
 							
-							<c:if test="${requestScope.authUser.gender eq 'female' }">
+							<c:if test="${getUser.gender eq 'female' }">
 								<label for="rdo-male">남</label> 
 								<input type="radio" id="rdo-male" name="gender" value="male"  > 
 								
@@ -80,9 +80,7 @@
 								<input type="radio" id="rdo-female" name="gender" value="female" checked = "checked"> 
 							</c:if>
 						</div>
-						<c:if test="${param.result eq 'fail' }">
-								<p>비밀번호를 입력해주세요.</p>
-						</c:if>
+
 						<!-- 버튼영역 -->
 		                <div class="button-area">
 		                    <button type="submit" id="btn-submit">회원정보수정</button>

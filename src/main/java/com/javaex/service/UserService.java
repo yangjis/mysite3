@@ -25,10 +25,12 @@ public class UserService {
 		return userDao.login(vo);
 	}
 	
-	public int updateUser(UserVo vo) {
+	public UserVo updateUser(UserVo vo) {
 		System.out.println("UserService.update");
 		
-		return userDao.updateUser(vo);
+		userDao.updateUser(vo);
+		
+		return userDao.getUser(vo.getNo());
 	}
 	public UserVo getUser(int no) {
 		System.out.println("userService.getUser");

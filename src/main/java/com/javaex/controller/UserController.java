@@ -70,8 +70,8 @@ public class UserController {
 		System.out.println("userController.fodifyForm");
 		UserVo vo = (UserVo)session.getAttribute("authUser");
 		
-		UserVo authUser = userService.getUser(vo.getNo());
-		model.addAttribute("authUser", authUser);
+		UserVo getUser = userService.getUser(vo.getNo());
+		model.addAttribute("getUser", getUser);
 		
 		return "user/modifyForm";
 	}
@@ -80,20 +80,12 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("userController.modify");
 		
-		if(!userVo.getPassword().isEmpty()) {
-			UserVo vo = (UserVo)session.getAttribute("authUser");
-			userVo.setNo(vo.getNo());
+		UserVo vo = (UserVo)session.getAttribute("authUser");
+		userVo.setNo(vo.getNo());
 			
-			userService.updateUser(userVo);
+		UserVo authUser = userService.updateUser(userVo); 
+		session.setAttribute("authUser", authUser);
 			
-			UserVo authUser = userService.login(userVo);
-			
-			session.removeAttribute("authUser");
-			session.setAttribute("authUser", authUser);
-			
-			return "redirect:/main";
-		}else {
-			return "redirect:/user/modifyForm?result=fail";
-		}
+		return "redirect:/main";
 	}
 }

@@ -22,8 +22,16 @@ public class UserDao {
 	
 	public UserVo getUser(UserVo userVo) {
 		System.out.println("userDao.login");
+		UserVo vo =sqlSession.selectOne("user.getUser", userVo);
+		System.out.println(vo.toString());
 		
-		return sqlSession.selectOne("user.getUser", userVo);
+		return vo;
+	}
+	
+	public int updateUser(UserVo userVo) {
+		System.out.println("userDao.updateUser");
+		
+		return sqlSession.update("user.updateUser", userVo);
 	}
 
 }

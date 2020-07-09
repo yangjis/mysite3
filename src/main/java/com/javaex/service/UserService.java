@@ -24,5 +24,11 @@ public class UserService {
 		
 		return userDao.getUser(vo);
 	}
+	
+	public int updateUser(UserVo vo) {
+		System.out.println("UserService.update");
+		
+		return userDao.updateUser(vo);
+	}
 
 }

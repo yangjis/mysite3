@@ -30,7 +30,7 @@ public class UserController {
 		System.out.println("user/join");
 		
 		userService.join(userVo);
-		return "redirect:/main";
+		return "user/joinOk";
 	}
 	
 	@RequestMapping("/loginForm")
@@ -68,5 +68,18 @@ public class UserController {
 	public String modifyForm(Model model) {
 		
 		return "user/modifyForm";
+	}
+	
+	@RequestMapping("/modify")
+	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
+		System.out.println(userVo.toString());
+		
+		userService.updateUser(userVo);
+		UserVo authUser = userService.login(userVo);
+		
+		session.removeAttribute("authUser");
+		session.setAttribute("authUser", authUser);
+		
+		return "redirect:/main";
 	}
 }

@@ -26,6 +26,7 @@ public class BoardService {
 	}
 	
 	public BoardVo getBoard(int no) {
+		boardDao.hitUpdate(no);
 		return boardDao.getBoard(no);
 	}
 	

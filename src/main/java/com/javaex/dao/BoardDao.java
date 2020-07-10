@@ -49,4 +49,7 @@ public class BoardDao {
 	public int keywordAllPage(String keyword) {
 		return sqlSession.selectOne("board.keywordAllPage", keyword);
 	}
+	public int hitUpdate(int no) {
+		return sqlSession.update("board.hitUpdate", no);
+	}
 }

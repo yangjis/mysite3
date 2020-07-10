@@ -106,7 +106,7 @@
 	
 	<update id="hitUpdate" parameterType="int">
 		<![CDATA[
-			update board set hit = hit + 1 where no = #{no};
+			update board set hit = hit + 1 where no = #{no}
 		]]>
 	</update>
 

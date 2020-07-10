@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
-	<select id="list" resultType="com.javaex.vo.BoardVo" parameterType="Map">
+	<select id="list" resultType="com.javaex.vo.BoardVo"
+		parameterType="Map">
 		<![CDATA[
 			SELECT no, 
 				   title, 
@@ -33,38 +34,52 @@
 			where rn >= #{start} and rn <= #{end}
 		]]>
 	</select>
-	
-	<select id="getBoard" resultType = "com.javaex.vo.BoardVo" parameterType="int">
+
+	<select id="getBoard" resultType="com.javaex.vo.BoardVo"
+		parameterType="int">
 		<![CDATA[
-			select b.no, b.title, b.content, b.hit, b.reg_date, b.user_no, u.name from board b, users u where b.user_no = u.no(+) and b.no = #{no}
-		]]>
+				UPDATE (SELECT b.no, 
+	                		   b.title, 
+	                		   b.content, 
+	                		   b.hit, 
+	               			   b.reg_date, 
+	                		   b.user_no, 
+	                		   u.name 
+	        			FROM board b, 
+	             			 users u
+	        			where b.no = #{no}
+	        			and b.user_no= u.no(+))
+				SET hit = hit + 1
+				where no = #{no}
+			]]>
 	</select>
-	
+
 	<update id="updateBoard" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			update board set title = #{title}, content = #{content}, reg_date = sysdate where no = #{no}
 		]]>
 	</update>
-	
+
 	<insert id="insertBoard" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			insert into board values(SEQ_BOARD_NO.nextval,#{title},#{content},0, sysdate, #{user_no})
 		]]>
 	</insert>
-	
+
 	<delete id="deleteBoard" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			delete board where no = #{no} and user_no = #{user_no}
 		]]>
 	</delete>
-	
-	<select id="allPage" resultType = "int">
+
+	<select id="allPage" resultType="int">
 		<![CDATA[
 			select count(*) count from board
 		]]>
 	</select>
-	
-	<select id="search" resultType="com.javaex.vo.BoardVo" parameterType="map">
+
+	<select id="search" resultType="com.javaex.vo.BoardVo"
+		parameterType="map">
 		<![CDATA[
 					SELECT no, 
 				   title, 
@@ -97,15 +112,16 @@
 			where rn >= #{start} and rn <= #{end}
 		]]>
 	</select>
-	
-	<select id="keywordAllPage" resultType = "int" parameterType="String">
+
+	<select id="keywordAllPage" resultType="int"
+		parameterType="String">
 		<![CDATA[
 			select count(*) count from board where title LIKE '%'||#{keyword}||'%'
 		]]>
 	</select>
-	
+
 	<update id="hitUpdate" parameterType="int">
-	update board set hit = hit + 1 where no = #{no}
+		update board set hit = hit + 1 where no = #{no}
 	</update>
 
 </mapper>

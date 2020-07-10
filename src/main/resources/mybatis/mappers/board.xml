@@ -103,5 +103,9 @@
 			select count(*) count from board where title LIKE '%'||#{keyword}||'%'
 		]]>
 	</select>
+	
+	<update id="hitUpdate" parameterType="int">
+	update board set hit = hit + 1 where no = #{no}
+	</update>
 
 </mapper>

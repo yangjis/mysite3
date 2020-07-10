@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,13 +70,27 @@ public class BoardController {
 		return "redirect:/board/list?pg=1";
 	}
 	
+	/*
+	 * @RequestMapping("/search") public String search(@RequestParam("keyword")
+	 * String keyword,
+	 * 
+	 * @RequestParam("pg") int pg, Model model) { Paging pgVo = new Paging(5, 5,
+	 * boardService.keywordAllPage(keyword),pg);
+	 * 
+	 * List<BoardVo> bList = boardService.search(pgVo.getWriting_Start(),
+	 * pgVo.getWriting_End(),keyword);
+	 * 
+	 * model.addAttribute("pg", pgVo); model.addAttribute("bList", bList); return
+	 * "board/list"; }
+	 */
+	
+	//맵을 이용해서 파라미터를 받아 사용하기.
 	@RequestMapping("/search")
-	public String search(@RequestParam("keyword") String keyword,
-						 @RequestParam("pg") int pg,
+	public String search(@ModelAttribute Map keywordMap,
 						 Model model) {
-		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage(keyword),pg);
+		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage((String)keywordMap.get("keyword")),(int)keywordMap.get("pg"));
 		
-		List<BoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(),keyword);
+		List<BoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(),(String)keywordMap.get("keyword"));
 		
 		model.addAttribute("pg", pgVo);
 		model.addAttribute("bList", bList);

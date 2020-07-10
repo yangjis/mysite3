@@ -34,11 +34,14 @@
 		]]>
 	</select>
 	
+
+	
 	<select id="getBoard" resultType = "com.javaex.vo.BoardVo" parameterType="int">
 		<![CDATA[
 			select b.no, b.title, b.content, b.hit, b.reg_date, b.user_no, u.name from board b, users u where b.user_no = u.no(+) and b.no = #{no}
 		]]>
 	</select>
+	
 	
 	<update id="updateBoard" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
@@ -52,17 +55,21 @@
 		]]>
 	</insert>
 	
+	
+	
 	<delete id="deleteBoard" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
 			delete board where no = #{no} and user_no = #{user_no}
 		]]>
 	</delete>
 	
+	
 	<select id="allPage" resultType = "int">
 		<![CDATA[
 			select count(*) count from board
 		]]>
 	</select>
+	
 	
 	<select id="search" resultType="com.javaex.vo.BoardVo" parameterType="map">
 		<![CDATA[
@@ -104,10 +111,18 @@
 		]]>
 	</select>
 	
+	
 	<update id="hitUpdate" parameterType="int">
 		<![CDATA[
 			update board set hit = hit + 1 where no = #{no}
 		]]>
 	</update>
+	
+	
+	<insert id="replyInsert" parameterType="com.javaex.vo.ReplyBoardVo">
+		<![CDATA[
+			insert INTO replyboard values(seq_rboard_id.nextval, #{user_no}, #{title}, #{content}, 0, sysdate, #{group_no},1,1,'n')
+		]]>
+	</insert>
 
 </mapper>

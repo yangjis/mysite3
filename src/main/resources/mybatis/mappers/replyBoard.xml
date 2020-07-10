@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyBoard">
+
+	<select id="list" resultType="com.javaex.vo.ReplyBoardVo" parameterType="Map">
+		<![CDATA[
+			SELECT no, 
+				   title, 
+				   name, 
+				   hit, 
+				   reg_date, 
+				   user_no,
+                   order_no,
+                   depth,
+                   group_no
+			FROM (SELECT rownum rn, 
+						 no, 
+						 title, 
+						 name, 
+						 hit, 
+						 reg_date, 
+						 user_no,
+                         order_no,
+                         depth,
+                         group_no
+				  FROM (SELECT b.no 
+				  			   no, 
+				  			   b.title 
+				  			   title, 
+				  			   u.name name, 
+				  			   b.hit hit, 
+				  			   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
+				  			   reg_date, 
+				  			   b.user_no user_no,
+                               b.group_no group_no,
+                               b.depth depth,
+                               b.order_no order_no
+				  		FROM replyboard b, 
+				  			 users u 
+				  		where b.user_no = u.no 
+				  		order by group_no desc, order_no ASC))
+			where rn >= #{start} and rn <= #{end}
+		]]>
+	</select>
+	
+	<select id="getBoard" resultType = "com.javaex.vo.ReplyBoardVo" parameterType="int">
+		<![CDATA[
+		select b.no no, 
+			   b.title title, 
+			   b.content content, 
+			   b.hit hit, 
+			   b.reg_date reg_date, 
+			   b.user_no user_no,
+			   b.depth depth,
+			   b.order_no,
+               b.group_no,
+			   u.name name 
+		from replyboard b, 
+			 users u 
+		where b.user_no = u.no(+) 
+		and b.no = #{no}
+		]]>
+	</select>
+	
+	<update id="updateBoard" parameterType="com.javaex.vo.ReplyBoardVo">
+		<![CDATA[
+		update replyboard set title = #{title}, content = #{content}, reg_date = sysdate where no = #{no}
+		]]>
+	</update>
+	
+	<insert id="insertBoard" parameterType="com.javaex.vo.ReplyBoardVo">
+		<![CDATA[
+			insert into replyboard values(seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,seq_group_no.nextval,1,0,'n')
+		]]>
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="com.javaex.vo.ReplyBoardVo">
+		<![CDATA[
+			delete replyboard where no = #{no} and user_no = #{user_no} 
+		]]>
+	</delete>
+	
+	<select id="allPage" resultType = "int">
+		<![CDATA[
+		select count(*) count from replyboard
+		]]>
+	</select>
+	
+	<select id="search" resultType="com.javaex.vo.ReplyBoardVo" parameterType="map">
+		<![CDATA[
+		SELECT no, 
+			   title, 
+			   name, 
+			   hit, 
+			   reg_date, 
+			   user_no 
+		FROM (SELECT rownum rn, 
+					 no, 
+					 title, 
+					 name, 
+					 hit, 
+					 reg_date, 
+					 user_no 
+			  FROM (SELECT b.no 
+			  			   no, 
+			  			   b.title 
+			  			   title, 
+			  			   u.name name, 
+			  			   b.hit hit, 
+			  			   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
+			  			   reg_date, 
+			  			   b.user_no user_no 
+			  		FROM replyboard b, 
+			  			 users u 
+			  		where b.user_no = u.no
+                    and b.title LIKE  '%'||#{keyword}||'%'
+			  		order by no desc))
+		where rn >= #{start} and rn <= #{end}
+		]]>
+	</select>
+	
+	<select id="keywordAllPage" resultType = "int" parameterType="String">
+		<![CDATA[
+		select count(*) count from replyboard where title LIKE '%'||#{keyword}||'%'
+		]]>
+	</select>
+	
+	<update id="hitUpdate" parameterType="int">
+		<![CDATA[
+		update replyboard set hit = hit + 1 where no = #{no}
+		]]>
+	</update>
+	
+	<insert id="replyInsert" parameterType="com.javaex.vo.ReplyBoardVo">
+		<![CDATA[
+		insert into replyboard values(seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,#{group_no},#{order_no},#{depth} ,'n')
+		]]>
+	</insert>
+</mapper>

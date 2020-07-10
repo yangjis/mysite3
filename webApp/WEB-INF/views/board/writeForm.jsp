@@ -42,7 +42,16 @@
 
 			<div id="board">
 				<div id="writeForm">
+					<c:if test="${param.boardType eq 'replyBoard' }">
+						<form action="${pageContext.request.contextPath }/board/replyWriteAction" method="get">
+						<input type = "hidden" name = "group_no" value="${param.group_no }">	
+						<input type = "hidden" name = "order_no" value="${param.order_no }">
+						<input type = "hidden" name = "depth" value="${param.depth }">
+					</c:if>
+					
+					<c:if test="${empty param.boardType }">
 					<form action="${pageContext.request.contextPath }/board/writeAction" method="get">
+					</c:if>
 						<!-- 제목 -->
 						<div class="form-group">
 							<label class="form-text" for="txt-title">제목</label>
@@ -55,7 +64,7 @@
 							<textarea id="txt-content" name = "content"></textarea>
 						</div>
 						
-						<a id="btn_cancel" href="">취소</a>
+						<a id="btn_cancel" href="${pageContext.request.contextPath }/board/list?pg=1">취소</a>
 						<button id="btn_add" type="submit" >등록</button>
 						
 					</form>

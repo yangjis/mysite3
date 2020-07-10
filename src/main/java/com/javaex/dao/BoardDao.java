@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BoardVo;
+import com.javaex.vo.ReplyBoardVo;
 
 @Repository
 public class BoardDao {
@@ -46,10 +47,16 @@ public class BoardDao {
 		
 		return bList;
 	}
+	
 	public int keywordAllPage(String keyword) {
 		return sqlSession.selectOne("board.keywordAllPage", keyword);
 	}
+	
 	public int hitUpdate(int no) {
 		return sqlSession.update("board.hitUpdate", no);
+	}
+	
+	public int replyInsert(ReplyBoardVo replyVo) {
+		return sqlSession.insert("board.replyInsert",replyVo);
 	}
 }

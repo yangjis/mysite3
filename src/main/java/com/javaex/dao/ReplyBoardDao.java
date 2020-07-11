@@ -58,4 +58,12 @@ public class ReplyBoardDao {
 	public int delUpdate(ReplyBoardVo vo) {
 		return sqlSession.update("replyBoard.delUpdate", vo);
 	}
+	
+	public int groupNoDelY(int group_no) {
+		return sqlSession.selectOne("replyBoard.groupNoDelY", group_no);
+	}
+	
+	public int lastOrderNo(int group_no) {
+		return sqlSession.selectOne("replyBoard.lastOrderNo", group_no);
+	}
 }

@@ -34,10 +34,8 @@ public class GuestBookController {
 	@RequestMapping("/addGuestBook")
 	public String addGuestBook(@ModelAttribute GuestBookVo vo) {
 		System.out.println("gController.addGuestBook");
-		System.out.println(vo.toString());
 		
 		guestService.addGuestBook(vo);
-		
 		return "redirect:/guestBook/addList";
 	}
 	

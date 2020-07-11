@@ -2,50 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="replyBoard">
 
-	<select id="list" resultType="com.javaex.vo.ReplyBoardVo" parameterType="Map">
-		<![CDATA[
-			SELECT no, 
-				   title, 
-				   name, 
-				   hit, 
-				   reg_date, 
-				   user_no,
-                   order_no,
-                   depth,
-                   group_no,
-                   del
-			FROM (SELECT rownum rn, 
-						 no, 
-						 title, 
-						 name, 
-						 hit, 
-						 reg_date, 
-						 user_no,
-                         order_no,
-                         depth,
-                         group_no,
-                         del
-				  FROM (SELECT b.no 
-				  			   no, 
-				  			   b.title 
-				  			   title, 
-				  			   u.name name, 
-				  			   b.hit hit, 
-				  			   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
-				  			   reg_date, 
-				  			   b.user_no user_no,
-                               b.group_no group_no,
-                               b.depth depth,
-                               b.order_no order_no,
-                               b.del del
-				  		FROM replyboard b, 
-				  			 users u 
-				  		where b.user_no = u.no 
-				  		order by group_no desc, order_no ASC))
-			where rn >= #{start} and rn <= #{end}
-		]]>
-	</select>
-	
 	<select id="getBoard" resultType = "com.javaex.vo.ReplyBoardVo" parameterType="int">
 		<![CDATA[
 		select b.no no, 
@@ -96,23 +52,35 @@
 			   name, 
 			   hit, 
 			   reg_date, 
-			   user_no 
+			   user_no,
+               order_no,
+               depth,
+               group_no,
+               del 
 		FROM (SELECT rownum rn, 
 					 no, 
 					 title, 
 					 name, 
 					 hit, 
 					 reg_date, 
-					 user_no 
+					 user_no,
+                     order_no,
+                     depth,
+                     group_no,
+                     del
 			  FROM (SELECT b.no 
-			  			   no, 
-			  			   b.title 
-			  			   title, 
-			  			   u.name name, 
-			  			   b.hit hit, 
-			  			   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
-			  			   reg_date, 
-			  			   b.user_no user_no 
+				  			 no, 
+				  			 b.title 
+				  			 title, 
+				  			 u.name name, 
+				  			 b.hit hit, 
+				  			 to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
+				  			 reg_date, 
+				  			 b.user_no user_no,
+                             b.group_no group_no,
+                             b.depth depth,
+                             b.order_no order_no,
+                             b.del del 
 			  		FROM replyboard b, 
 			  			 users u 
 			  		where b.user_no = u.no

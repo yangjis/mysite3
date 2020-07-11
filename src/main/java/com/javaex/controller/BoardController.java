@@ -80,7 +80,7 @@ public class BoardController {
 		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage(keyword),pg);
 		  
 		List<BoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(),keyword);
-		  
+		
 		model.addAttribute("pg", pgVo); 
 		model.addAttribute("bList", bList); 
 		return "board/list"; 

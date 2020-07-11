@@ -16,12 +16,6 @@ public class ReplyBoardDao {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public List<ReplyBoardVo> list(Map pageMap){
-		List<ReplyBoardVo> bList = sqlSession.selectList("replyBoard.list", pageMap);
-		
-		return bList;
-	}
-	
 	public int allPage() {
 		return sqlSession.selectOne("replyBoard.allPage");
 	}
@@ -29,7 +23,6 @@ public class ReplyBoardDao {
 	public ReplyBoardVo getBoard(int no) {
 		ReplyBoardVo vo = sqlSession.selectOne("replyBoard.getBoard", no);
 		
-		System.out.println(vo.toString());
 		return vo;
 	}
 	

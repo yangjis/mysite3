@@ -25,13 +25,24 @@ public class ReplyBoardController {
 	@Autowired
 	ReplyBoardService boardService;
 	
+	@RequestMapping("/search") 
+	public String search(@RequestParam("keyword")String keyword,
+			@RequestParam("pg") int pg, 
+			Model model) { 
+		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage(keyword),pg);
+		
+		List<ReplyBoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(),keyword);
+		model.addAttribute("pg", pgVo); 
+		model.addAttribute("bList", bList); 
+		return "board/list"; 
+	}
+	
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam("pg") int pg) {
 		
 		Paging pgVo = new Paging(10, 10, boardService.allPage(),pg);
 		
 		List<ReplyBoardVo> bList = boardService.list(pgVo.getWriting_Start(), pgVo.getWriting_End());
-		System.out.println("controller " + bList.toString());
 		
 		model.addAttribute("pg", pgVo);
 		model.addAttribute("bList", bList);
@@ -75,18 +86,6 @@ public class ReplyBoardController {
 		return "redirect:/board/list?pg=1";
 	}
 	
-	@RequestMapping("/search") 
-	 public String search(@RequestParam("keyword")String keyword,
-			  			   @RequestParam("pg") int pg, 
-			  			   Model model) { 
-		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage(keyword),pg);
-		  
-		List<ReplyBoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(),keyword);
-		  
-		model.addAttribute("pg", pgVo); 
-		model.addAttribute("bList", bList); 
-		return "board/list"; 
-	}
 		
 	@RequestMapping("/replyWriteForm") 
 	public String replyWriteForm(@RequestParam("group_no")int group_no,

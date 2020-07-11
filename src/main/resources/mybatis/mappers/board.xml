@@ -86,14 +86,11 @@
 						 hit, 
 						 reg_date, 
 						 user_no 
-				  FROM (SELECT b.no 
-				  			   no, 
-				  			   b.title 
-				  			   title, 
+				  FROM (SELECT b.no no, 
+				  			   b.title title, 
 				  			   u.name name, 
 				  			   b.hit hit, 
-				  			   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
-				  			   reg_date, 
+				  			   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') reg_date, 
 				  			   b.user_no user_no 
 				  		FROM board b, 
 				  			 users u 

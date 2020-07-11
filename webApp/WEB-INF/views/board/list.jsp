@@ -73,9 +73,9 @@
 								<td> ${vo.name }</td>
 								<td> ${vo.hit }</td>
 								<td> ${vo.reg_date }</td>
-								<c:if test="${empty authUser.no || authUser.no != vo.user_no}">
-								<td></td>
-								</c:if>
+								
+								<c:if test="${empty authUser.no || authUser.no != vo.user_no}"><td></td></c:if>
+								
 								<c:if test="${authUser.no eq vo.user_no}">
 									<c:if test="${vo.del eq 'y' }"><td class="text-left"></td></c:if>
 									<c:if test="${vo.del eq 'n' }"><td class="text-left"><a href="${pageContext.request.contextPath }/board/delete?no=${vo.no }&user_no=${vo.user_no}&order_no=${vo.order_no}&group_no=${vo.group_no}">[삭제]</a></td></c:if>

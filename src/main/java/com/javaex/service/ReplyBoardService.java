@@ -22,8 +22,9 @@ public class ReplyBoardService {
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("start", start);
 		pageMap.put("end", end);
+		pageMap.put("keyword", "");
 		
-		List<ReplyBoardVo> bList = boardDao.list(pageMap);
+		List<ReplyBoardVo> bList = boardDao.search(pageMap);
 		
 		for(int i = 0; i < bList.size(); i++) {
 			if("y".equals(bList.get(i).getDel())) {
@@ -31,7 +32,16 @@ public class ReplyBoardService {
 			}
 		}
 		
-		System.out.println(bList.toString());
+		return bList;
+	}
+	
+	public List<ReplyBoardVo> search(int start, int end, String keyword) {
+		Map<String, Object> pageMap = new HashMap<String, Object>();
+		pageMap.put("start", start);
+		pageMap.put("end", end);
+		pageMap.put("keyword", keyword);
+		
+		List<ReplyBoardVo> bList = boardDao.search(pageMap);
 		return bList;
 	}
 	
@@ -62,20 +72,9 @@ public class ReplyBoardService {
 			  count = boardDao.delUpdate(boardVo);
 		  }
 		 
-		
-		System.out.println(boardVo.toString());
-		return 0;
+		return count;
 	}
 	
-	public List<ReplyBoardVo> search(int start, int end, String keyword) {
-		Map<String, Object> pageMap = new HashMap<String, Object>();
-		pageMap.put("start", start);
-		pageMap.put("end", end);
-		pageMap.put("keyword", keyword);
-		
-		List<ReplyBoardVo> bList = boardDao.search(pageMap);
-		return bList;
-	}
 	
 	public int keywordAllPage(String keyword) {
 		return boardDao.keywordAllPage(keyword);

@@ -16,10 +16,6 @@ public class ReplyBoardDao {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public int allPage() {
-		return sqlSession.selectOne("replyBoard.allPage");
-	}
-	
 	public ReplyBoardVo getBoard(int no) {
 		ReplyBoardVo vo = sqlSession.selectOne("replyBoard.getBoard", no);
 		

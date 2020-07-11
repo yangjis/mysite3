@@ -39,12 +39,6 @@
 		]]>
 	</delete>
 	
-	<select id="allPage" resultType = "int">
-		<![CDATA[
-		select count(*) count from replyboard
-		]]>
-	</select>
-	
 	<select id="search" resultType="com.javaex.vo.ReplyBoardVo" parameterType="map">
 		<![CDATA[
 		SELECT no, 

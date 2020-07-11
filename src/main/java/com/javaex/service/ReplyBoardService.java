@@ -46,7 +46,12 @@ public class ReplyBoardService {
 	}
 	
 	public int allPage() {
-		return boardDao.allPage();
+		String keyword = "";
+		return boardDao.keywordAllPage(keyword);
+	}
+	
+	public int keywordAllPage(String keyword) {
+		return boardDao.keywordAllPage(keyword);
 	}
 	
 	public ReplyBoardVo getBoard(int no) {
@@ -76,9 +81,6 @@ public class ReplyBoardService {
 	}
 	
 	
-	public int keywordAllPage(String keyword) {
-		return boardDao.keywordAllPage(keyword);
-	}
 	
 	public int replyInsert(ReplyBoardVo vo) {
 		vo.setOrder_no(vo.getOrder_no() + 1);

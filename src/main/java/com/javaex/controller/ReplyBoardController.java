@@ -28,9 +28,10 @@ public class ReplyBoardController {
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam("pg") int pg) {
 		
-		Paging pgVo = new Paging(5, 5, boardService.allPage(),pg);
+		Paging pgVo = new Paging(10, 10, boardService.allPage(),pg);
 		
 		List<ReplyBoardVo> bList = boardService.list(pgVo.getWriting_Start(), pgVo.getWriting_End());
+		System.out.println("controller " + bList.toString());
 		
 		model.addAttribute("pg", pgVo);
 		model.addAttribute("bList", bList);

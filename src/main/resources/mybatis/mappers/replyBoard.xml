@@ -12,7 +12,8 @@
 				   user_no,
                    order_no,
                    depth,
-                   group_no
+                   group_no,
+                   del
 			FROM (SELECT rownum rn, 
 						 no, 
 						 title, 
@@ -22,7 +23,8 @@
 						 user_no,
                          order_no,
                          depth,
-                         group_no
+                         group_no,
+                         del
 				  FROM (SELECT b.no 
 				  			   no, 
 				  			   b.title 
@@ -34,7 +36,8 @@
 				  			   b.user_no user_no,
                                b.group_no group_no,
                                b.depth depth,
-                               b.order_no order_no
+                               b.order_no order_no,
+                               b.del del
 				  		FROM replyboard b, 
 				  			 users u 
 				  		where b.user_no = u.no 
@@ -136,4 +139,16 @@
 		insert into replyboard values(seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,#{group_no},#{order_no},#{depth} ,'n')
 		]]>
 	</insert>
+	
+	<select id="group_noCount" parameterType="com.javaex.vo.ReplyBoardVo" resultType="int">
+		<![CDATA[
+		select count(*) count from replyboard where group_no=#{group_no}
+		]]>
+	</select>
+	
+	<update id="delUpdate" parameterType="com.javaex.vo.ReplyBoardVo">
+		<![CDATA[
+		update replyboard set del = 'y' where no = #{no}
+		]]>
+	</update>
 </mapper>

@@ -24,6 +24,14 @@ public class ReplyBoardService {
 		pageMap.put("end", end);
 		
 		List<ReplyBoardVo> bList = boardDao.list(pageMap);
+		
+		for(int i = 0; i < bList.size(); i++) {
+			if("y".equals(bList.get(i).getDel())) {
+				bList.get(i).setTitle("게시글이 삭제되었습니다.");
+			}
+		}
+		
+		System.out.println(bList.toString());
 		return bList;
 	}
 	
@@ -46,8 +54,16 @@ public class ReplyBoardService {
 	}
 	
 	public int deleteBoard(ReplyBoardVo boardVo) {
-		System.out.println("delete service "+boardVo.toString());
-//		int count = boardDao.deleteBoard(boardVo); 
+		int count;
+		
+		  if(boardDao.group_noCount(boardVo) < 2) { 
+			  count = boardDao.deleteBoard(boardVo); 
+		  }else {
+			  count = boardDao.delUpdate(boardVo);
+		  }
+		 
+		
+		System.out.println(boardVo.toString());
 		return 0;
 	}
 	

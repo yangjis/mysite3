@@ -86,23 +86,5 @@ public class BoardController {
 		return "board/list"; 
 	}
 	 
-	/*
-	 * @RequestMapping("/replyWriteForm") public String
-	 * replyWriteForm(@RequestParam("group_no")int group_no,
-	 * 
-	 * @RequestParam("boardType") String boardType, Model model) {
-	 * 
-	 * Map<String, Object> noTypeMap= new HashMap<String, Object>();
-	 * noTypeMap.put("group_no", group_no); noTypeMap.put("boardType", boardType);
-	 * model.addAttribute("board", noTypeMap);
-	 * 
-	 * return "board/writeForm"; }
-	 * 
-	 * @RequestMapping("replyWriteAction") public String
-	 * replyWriteAction(@ModelAttribute ReplyBoardVo replyVo) {
-	 * System.out.println(replyVo.toString() + "   replyVo입니다.");
-	 * 
-	 * boardService.replyInsert(replyVo); return "redirect:/board/list?pg=1"; }
-	 */
 	
 }

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,15 +64,21 @@
 							<c:forEach var="vo" items="${requestScope.bList}">
 							<tr>
 								<td>${vo.no }</td>
+								
+								<c:if test="${vo.del eq 'y' }"><td class="text-left-red">${vo.title }</td></c:if>
+								
+								<c:if test="${vo.del eq 'n' }">
 								<td class="text-left">
-									<a href="${pageContext.request.contextPath }/board/read?no=${vo.no}"><c:forEach var="i" begin="1" end="${vo.depth }"><c:out value="\n\n\n\n" /></c:forEach>${vo.title }</a>
+									<a href="${pageContext.request.contextPath }/board/read?no=${vo.no}"><c:forEach var="i" begin="1" end="${vo.depth }">&nbsp;&nbsp;&nbsp;</c:forEach>${vo.title }</a>
 								</td>
+								</c:if>
+								
 								<td> ${vo.name }</td>
 								<td> ${vo.hit }</td>
 								<td> ${vo.reg_date }</td>
 								<td>
 								<c:if test="${authUser.no eq vo.user_no}">
-									<a href="${pageContext.request.contextPath }/board/delete?no=${vo.no }&user_no=${vo.user_no}&order_no=${vo.order_no}">[삭제]</a>
+									<a href="${pageContext.request.contextPath }/board/delete?no=${vo.no }&user_no=${vo.user_no}&order_no=${vo.order_no}&group_no=${vo.group_no}">[삭제]</a>
 								</c:if>
 								</td>
 							</tr>

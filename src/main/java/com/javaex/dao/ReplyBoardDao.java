@@ -61,4 +61,12 @@ public class ReplyBoardDao {
 	public int replyInsert(ReplyBoardVo vo) {
 		return sqlSession.insert("replyBoard.replyInsert", vo);
 	}
+	
+	public int group_noCount(ReplyBoardVo vo) {
+		return sqlSession.selectOne("replyBoard.group_noCount",vo);
+	}
+	
+	public int delUpdate(ReplyBoardVo vo) {
+		return sqlSession.update("replyBoard.delUpdate", vo);
+	}
 }

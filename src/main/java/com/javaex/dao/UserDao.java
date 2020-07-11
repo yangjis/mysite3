@@ -23,7 +23,6 @@ public class UserDao {
 	public UserVo login(UserVo userVo) {
 		System.out.println("userDao.login");
 		UserVo vo =sqlSession.selectOne("user.login", userVo);
-		System.out.println(vo.toString());
 		
 		return vo;
 	}

@@ -125,4 +125,10 @@
 		select count(*)  from replyboard where parentsNo= #{no}
 	]]>
 	</select>
+	
+	<delete id="groupAllDel" parameterType = "int">
+	<![CDATA[
+		delete replyboard where group_no= #{group_no}
+	]]>
+	</delete>
 </mapper>

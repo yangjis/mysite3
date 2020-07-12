@@ -26,11 +26,6 @@ public class ReplyBoardService {
 		
 		List<ReplyBoardVo> bList = boardDao.search(pageMap);
 
-		for(int i = 0; i < bList.size(); i++) {
-			if(boardDao.groupNoDelY(bList.get(i).getGroup_no())==0) {
-				boardDao.deleteBoard(bList.get(i));
-			}
-		}
 		return bList;
 	}
 	
@@ -69,9 +64,16 @@ public class ReplyBoardService {
 	
 	public int deleteBoard(ReplyBoardVo boardVo) {
 		
-		  if(boardDao.childCount(boardVo.getNo()) == 0 || boardDao.groupNoDelY(boardVo.getGroup_no()) == 1 ) {	  
+		  if(boardDao.groupNoDelY(boardVo.getGroup_no()) == 1) {
+			  //같은 그룹의 del이 자기자신 빼고 모두 y일 경우 같은 그룹 다 삭제;
+			  return boardDao.groupAllDel(boardVo.getGroup_no());
+			  
+		  }else if(boardDao.childCount(boardVo.getNo()) == 0 ) {
+			  //자식이 없을 경우 삭제;
 			  return  boardDao.deleteBoard(boardVo); 
+			  
 		  }else {
+			  //자식이 있음;
 			  return boardDao.delUpdate(boardVo);
 		  }
 	}

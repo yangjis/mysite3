@@ -62,4 +62,8 @@ public class ReplyBoardDao {
 	public int childCount(int no) {
 		return sqlSession.selectOne("replyBoard.childCount", no);
 	}
+	
+	public int groupAllDel(int group_no) {
+		return sqlSession.delete("replyBoard.groupAllDel", group_no);
+	}
 }

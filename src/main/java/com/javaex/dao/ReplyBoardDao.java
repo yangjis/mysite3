@@ -17,9 +17,7 @@ public class ReplyBoardDao {
 	SqlSession sqlSession;
 	
 	public ReplyBoardVo getBoard(int no) {
-		ReplyBoardVo vo = sqlSession.selectOne("replyBoard.getBoard", no);
-		
-		return vo;
+		return sqlSession.selectOne("replyBoard.getBoard", no);
 	}
 	
 	public int updateBoard(ReplyBoardVo boardVo) {

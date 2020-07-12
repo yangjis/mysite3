@@ -29,7 +29,17 @@
 	
 	<insert id="insertBoard" parameterType="com.javaex.vo.ReplyBoardVo">
 		<![CDATA[
-			insert into replyboard values(0, seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,seq_group_no.nextval,1,0,'n')
+			insert into replyboard values(0, 
+										  seq_rboard_id.nextval,
+										  #{user_no},
+										  #{title},
+										  #{content}, 
+										  0,
+										  sysdate,
+										  seq_group_no.nextval,
+										  1,
+										  0,
+										  'n')
 		]]>
 	</insert>
 	
@@ -42,7 +52,7 @@
 	<select id="search" resultType="com.javaex.vo.ReplyBoardVo" parameterType="map">
 		<![CDATA[
 		SELECT no,
-                parentsNo,
+               parentsNo,
 			   title, 
 			   name, 
 			   hit, 
@@ -53,7 +63,7 @@
                group_no,
                del 
 		FROM (SELECT rownum rn,
-                    parentsNo,
+                     parentsNo,
 					 no, 
 					 title, 
 					 name, 
@@ -64,23 +74,19 @@
                      depth,
                      group_no,
                      del
-			  FROM (SELECT b.no 
-				  			 no,
-                             b.parentsNo parentsNo,
-				  			 b.title 
-				  			 title, 
-				  			 u.name name, 
-				  			 b.hit hit, 
-				  			 to_char(b.reg_date,'yyyy-mm-dd hh24:mi') 
-				  			 reg_date, 
-				  			 b.user_no user_no,
-                             b.group_no group_no,
-                             b.depth depth,
-                             b.order_no order_no,
-                             b.del del 
+			  FROM (SELECT b.no no,
+                           b.parentsNo parentsNo,
+				  		   b.title title, 
+				  		   u.name name, 
+				  		   b.hit hit, 
+				  		   to_char(b.reg_date,'yyyy-mm-dd hh24:mi') reg_date, 
+				  		   b.user_no user_no,
+                           b.group_no group_no,
+                           b.depth depth,
+                           b.order_no order_no,
+                           b.del del 
 			  		FROM replyboard b, 
 			  			 users u 
-                    
 			  		where b.user_no = u.no
                     and b.title LIKE  '%'||#{keyword}||'%'
                     start with b.parentsno = 0 
@@ -104,7 +110,17 @@
 	
 	<insert id="replyInsert" parameterType="com.javaex.vo.ReplyBoardVo">
 		<![CDATA[
-		insert into replyboard values(#{parentsNo},seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,#{group_no},#{order_no},#{depth} ,'n')
+		insert into replyboard values(#{parentsNo},
+									  seq_rboard_id.nextval,
+									  #{user_no},
+									  #{title},
+									  #{content}, 
+									  0,
+									  sysdate,
+									  #{group_no},
+									  #{order_no},
+									  #{depth},
+									  'n')
 		]]>
 	</insert>
 	

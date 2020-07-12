@@ -28,7 +28,7 @@ public class ReplyBoardService {
 
 		return bList;
 	}
-	
+
 	public List<ReplyBoardVo> search(int start, int end, String keyword) {
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("start", start);

@@ -108,12 +108,6 @@
 		]]>
 	</insert>
 	
-	<select id="group_noCount" parameterType="com.javaex.vo.ReplyBoardVo" resultType="int">
-		<![CDATA[
-		select count(*) count from replyboard where group_no=#{group_no}
-		]]>
-	</select>
-	
 	<update id="delUpdate" parameterType="com.javaex.vo.ReplyBoardVo">
 		<![CDATA[
 		update replyboard set del = 'y' where no = #{no}
@@ -125,12 +119,6 @@
 		select count(*) count from replyBoard where group_no = #{group_no} and del = 'n'
 		]]>
 	</select>
-	
-	<!-- <select id="lastOrderNo" parameterType="int" resultType="int">
-		<![CDATA[
-			select order_no from (select rownum, order_no from replyBoard where group_no= #{group_no} order by order_no desc) where rownum = 1
-		]]>
-	</select> -->
 	
 	<select id="childCount" parameterType="int" resultType = "int">
 	<![CDATA[

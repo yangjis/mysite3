@@ -17,6 +17,7 @@ create table guestbook(
 );
 
 create table replyboard(
+    parentsNo     number(30),
     no          number,
     user_no     number not null,
     title       varchar2(500),
@@ -35,4 +36,4 @@ create SEQUENCE SEQ_GUEST_NO increment by 1 start with 1;
 create sequence seq_rboard_id increment by 1 start with 1;
 create sequence seq_group_no increment by 1 start with 1;
 
-
+--drop table replyboard

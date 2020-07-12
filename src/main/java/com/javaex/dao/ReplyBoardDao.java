@@ -51,20 +51,12 @@ public class ReplyBoardDao {
 		return sqlSession.insert("replyBoard.replyInsert", vo);
 	}
 	
-	public int group_noCount(ReplyBoardVo vo) {
-		return sqlSession.selectOne("replyBoard.group_noCount",vo);
-	}
-	
 	public int delUpdate(ReplyBoardVo vo) {
 		return sqlSession.update("replyBoard.delUpdate", vo);
 	}
 	
 	public int groupNoDelY(int group_no) {
 		return sqlSession.selectOne("replyBoard.groupNoDelY", group_no);
-	}
-	
-	public int lastOrderNo(int group_no) {
-		return sqlSession.selectOne("replyBoard.lastOrderNo", group_no);
 	}
 	
 	public int childCount(int no) {

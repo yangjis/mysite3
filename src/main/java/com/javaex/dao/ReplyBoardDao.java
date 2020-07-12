@@ -66,4 +66,8 @@ public class ReplyBoardDao {
 	public int lastOrderNo(int group_no) {
 		return sqlSession.selectOne("replyBoard.lastOrderNo", group_no);
 	}
+	
+	public int childCount(int no) {
+		return sqlSession.selectOne("replyBoard.childCount", no);
+	}
 }

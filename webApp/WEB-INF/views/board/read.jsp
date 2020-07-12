@@ -77,7 +77,7 @@
 						<a id="btn_modify" href="${pageContext.request.contextPath }/board/list?pg=1">목록</a>
 						
 						<c:if test="${!empty authUser.no}">
-						<a id="btn_modify" href="${pageContext.request.contextPath }/board/replyWriteForm?group_no=${getBoard.group_no}&boardType=replyBoard&depth=${getBoard.depth}&order_no=${getBoard.order_no}">댓글등록</a>
+						<a id="btn_modify" href="${pageContext.request.contextPath }/board/replyWriteForm?parentsNo=${getBoard.no }&group_no=${getBoard.group_no}&boardType=replyBoard&depth=${getBoard.depth}&order_no=${getBoard.order_no}">댓글등록</a>
 						</c:if>
 						
 					</form>

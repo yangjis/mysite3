@@ -47,6 +47,7 @@
 						<input type = "hidden" name = "group_no" value="${param.group_no }">	
 						<input type = "hidden" name = "order_no" value="${param.order_no }">
 						<input type = "hidden" name = "depth" value="${param.depth }">
+						<input type = "hidden" name = "parentsNo" value="${param.parentsNo }">
 					</c:if>
 					
 					<c:if test="${empty param.boardType }">

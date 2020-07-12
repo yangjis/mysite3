@@ -89,20 +89,22 @@ public class ReplyBoardController {
 		
 	@RequestMapping("/replyWriteForm") 
 	public String replyWriteForm(@RequestParam("group_no")int group_no,
-								 @RequestParam("boardType") String boardType, 
+								 @RequestParam("boardType") String boardType,
+								 @RequestParam("parentsNo") int parentsNo,
 								 Model model) {
 	  
 	  Map<String, Object> noTypeMap= new HashMap<String, Object>();
 	  noTypeMap.put("group_no", group_no); 
 	  noTypeMap.put("boardType", boardType);
 	  model.addAttribute("board", noTypeMap);
+	  model.addAttribute("parentsNo", parentsNo);
 	  
 	  return "board/writeForm"; 
 	}
 	  
 	@RequestMapping("replyWriteAction") 
 	public String replyWriteAction(@ModelAttribute ReplyBoardVo replyVo) {
-		boardService.replyInsert(replyVo); 
+		boardService.replyInsert(replyVo);
 		return "redirect:/board/list?pg=1"; 
 	 }
 	 

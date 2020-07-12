@@ -64,7 +64,7 @@
 							<c:forEach var="vo" items="${requestScope.bList}">
 							<tr>
 								<td>${vo.no }</td>
-								<c:if test="${vo.del eq 'y' }"><td class="text-left">삭제되었습니다.</td></c:if>
+								<c:if test="${vo.del eq 'y' }"><td class="text-left"><c:forEach var="i" begin="1" end="${vo.depth }">&nbsp;&nbsp;&nbsp;</c:forEach>삭제되었습니다.</td></c:if>
 								
 								<c:if test="${vo.del eq 'n' }">
 								<td class="text-left"><a href="${pageContext.request.contextPath }/board/read?no=${vo.no}"><c:forEach var="i" begin="1" end="${vo.depth }">&nbsp;&nbsp;&nbsp;</c:forEach>${vo.title }</a></td>

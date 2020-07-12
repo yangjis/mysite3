@@ -12,9 +12,10 @@ public class ReplyBoardVo {
 	private int depth;
 	private String del;
 	private String name;
+	private int parentsNo;
 	
 	public ReplyBoardVo() {}
-	public ReplyBoardVo(int no, int user_no, String title, String content, int hit,String reg_date, int group_no, int order_no, int depth, String del, String name) {
+	public ReplyBoardVo(int parentsNo,int no, int user_no, String title, String content, int hit,String reg_date, int group_no, int order_no, int depth, String del, String name) {
 		this.group_no = no;
 		this.user_no = user_no;
 		this.title = title;
@@ -28,6 +29,12 @@ public class ReplyBoardVo {
 		this.name = name;
 	}
 	
+	public int getParentsNo() {
+		return parentsNo;
+	}
+	public void setParentsNo(int parentsNo) {
+		this.parentsNo = parentsNo;
+	}
 	public String getName() {
 		return name;
 	}
@@ -94,11 +101,12 @@ public class ReplyBoardVo {
 	public void setDel(String del) {
 		this.del = del;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "replyBoardVo [no=" + no + ", user_no=" + user_no + ", title=" + title + ", content=" + content
+		return "ReplyBoardVo [no=" + no + ", user_no=" + user_no + ", title=" + title + ", content=" + content
 				+ ", hit=" + hit + ", reg_date=" + reg_date + ", group_no=" + group_no + ", order_no=" + order_no
-				+ ", depth=" + depth + ", del=" + del + "]";
+				+ ", depth=" + depth + ", del=" + del + ", name=" + name + ", parentsNo=" + parentsNo + "]";
 	}
+	
 }

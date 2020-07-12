@@ -25,12 +25,12 @@ public class ReplyBoardService {
 		pageMap.put("keyword", "");
 		
 		List<ReplyBoardVo> bList = boardDao.search(pageMap);
+
 		for(int i = 0; i < bList.size(); i++) {
-			//그룹 번호가 같은 게시글 중 del값이 모두 y면 모두 삭제.
-			if("y".equals(bList.get(i).getDel()) && boardDao.groupNoDelY(bList.get(i).getGroup_no()) == 0 ) {
+			if(boardDao.groupNoDelY(bList.get(i).getGroup_no())==0) {
 				boardDao.deleteBoard(bList.get(i));
 			}
-		}		
+		}
 		return bList;
 	}
 	
@@ -69,7 +69,7 @@ public class ReplyBoardService {
 	
 	public int deleteBoard(ReplyBoardVo boardVo) {
 		
-		  if(boardDao.group_noCount(boardVo) == 1 || boardDao.groupNoDelY(boardVo.getGroup_no()) == 0) {	  
+		  if(boardDao.childCount(boardVo.getNo()) == 0 || boardDao.groupNoDelY(boardVo.getGroup_no()) == 1 ) {	  
 			  return  boardDao.deleteBoard(boardVo); 
 		  }else {
 			  return boardDao.delUpdate(boardVo);
@@ -77,7 +77,6 @@ public class ReplyBoardService {
 	}
 	
 	public int replyInsert(ReplyBoardVo vo) {
-		int lastOrderNo = boardDao.lastOrderNo(vo.getGroup_no());
 		vo.setOrder_no(vo.getOrder_no() + 1);
 		vo.setDepth(vo.getDepth() + 1);
 		

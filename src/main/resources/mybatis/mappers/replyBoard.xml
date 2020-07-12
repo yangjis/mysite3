@@ -29,7 +29,7 @@
 	
 	<insert id="insertBoard" parameterType="com.javaex.vo.ReplyBoardVo">
 		<![CDATA[
-			insert into replyboard values(seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,seq_group_no.nextval,1,0,'n')
+			insert into replyboard values(0, seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,seq_group_no.nextval,1,0,'n')
 		]]>
 	</insert>
 	
@@ -41,7 +41,8 @@
 	
 	<select id="search" resultType="com.javaex.vo.ReplyBoardVo" parameterType="map">
 		<![CDATA[
-		SELECT no, 
+		SELECT no,
+                parentsNo,
 			   title, 
 			   name, 
 			   hit, 
@@ -51,7 +52,8 @@
                depth,
                group_no,
                del 
-		FROM (SELECT rownum rn, 
+		FROM (SELECT rownum rn,
+                    parentsNo,
 					 no, 
 					 title, 
 					 name, 
@@ -63,7 +65,8 @@
                      group_no,
                      del
 			  FROM (SELECT b.no 
-				  			 no, 
+				  			 no,
+                             b.parentsNo parentsNo,
 				  			 b.title 
 				  			 title, 
 				  			 u.name name, 
@@ -77,9 +80,12 @@
                              b.del del 
 			  		FROM replyboard b, 
 			  			 users u 
+                    
 			  		where b.user_no = u.no
                     and b.title LIKE  '%'||#{keyword}||'%'
-			  		order by group_no desc,reg_date asc, order_no asc))
+                    start with b.parentsno = 0 
+                    connect by prior b.no = b.parentsno
+                    order siblings by b.group_no desc, order_no asc))
 		where rn >= #{start} and rn <= #{end}
 		]]>
 	</select>
@@ -98,7 +104,7 @@
 	
 	<insert id="replyInsert" parameterType="com.javaex.vo.ReplyBoardVo">
 		<![CDATA[
-		insert into replyboard values(seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,#{group_no},#{order_no},#{depth} ,'n')
+		insert into replyboard values(#{parentsNo},seq_rboard_id.nextval,#{user_no},#{title},#{content}, 0,sysdate,#{group_no},#{order_no},#{depth} ,'n')
 		]]>
 	</insert>
 	
@@ -120,9 +126,15 @@
 		]]>
 	</select>
 	
-	<select id="lastOrderNo" parameterType="int" resultType="int">
+	<!-- <select id="lastOrderNo" parameterType="int" resultType="int">
 		<![CDATA[
 			select order_no from (select rownum, order_no from replyBoard where group_no= #{group_no} order by order_no desc) where rownum = 1
 		]]>
+	</select> -->
+	
+	<select id="childCount" parameterType="int" resultType = "int">
+	<![CDATA[
+		select count(*)  from replyboard where parentsNo= #{no}
+	]]>
 	</select>
 </mapper>

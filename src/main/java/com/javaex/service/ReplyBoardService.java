@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.ReplyBoardDao;
+import com.javaex.util.Paging;
 import com.javaex.vo.BoardVo;
 import com.javaex.vo.ReplyBoardVo;
 
@@ -18,6 +19,7 @@ public class ReplyBoardService {
 	ReplyBoardDao boardDao;
 
 	public List<ReplyBoardVo> list(int start, int end) {
+		
 
 		Map<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("start", start);
@@ -38,6 +40,16 @@ public class ReplyBoardService {
 		List<ReplyBoardVo> bList = boardDao.search(pageMap);
 		return bList;
 	}
+	/*public Map search(int pg, String keyword){
+		Paging pgVo = new Paging(5, 5, boardDao.keywordAllPage(keyword), pg);
+		List<ReplyBoardVo> bList = boardDao.search(pgVo.getPage_Start(), pgVo.getWriting_End(), keyword);
+		
+		Map<String, Object> bListAndPgMap = new HashMap<String, Object>();
+		bListAndPgMap.put("bList", bList);
+		bListAndPgMap.put("pg", pgVo);
+		
+		return bListAndPgMap;
+	}*/
 
 	public int allPage() {
 		String keyword = "";

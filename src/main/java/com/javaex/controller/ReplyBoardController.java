@@ -30,12 +30,18 @@ public class ReplyBoardController {
 						 @RequestParam("pg") int pg, 
 						 Model model) {
 		Paging pgVo = new Paging(5, 5, boardService.keywordAllPage(keyword), pg);
-
+		
 		List<ReplyBoardVo> bList = boardService.search(pgVo.getWriting_Start(), pgVo.getWriting_End(), keyword);
 		model.addAttribute("pg", pgVo);
 		model.addAttribute("bList", bList);
 		return "board/list";
 	}
+	/*public String search(@RequestParam("keyword") String keyword,
+						 @RequestParam("pg") int pg,
+						 Model model) {
+		Map<String, Object> bListAndPgMap = boardService.search(keyword, pg);
+		return "board/list";
+	}*/
 
 	@RequestMapping("/list")
 	public String list(Model model, @RequestParam("pg") int pg) {

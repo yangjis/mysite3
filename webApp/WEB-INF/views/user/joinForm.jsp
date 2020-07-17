@@ -112,10 +112,10 @@
 		
 		$.ajax({
 			
-			url : "${pageContext.request.contextPath }/user/idcheck?" 		
+			url : "${pageContext.request.contextPath }/user/idcheck", 		
 			type : "post",
 			//contentType : "application/json",
-			//data : {id: uId},
+			data : {userId: uId},
 			dataType : "json",
 			success : function(result){
 				/*성공시 처리해야될 코드 작성*/

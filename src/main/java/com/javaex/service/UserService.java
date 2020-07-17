@@ -12,6 +12,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	public UserVo idcheck(String id) {
+		return userDao.idcheck(id);
+	}
+	
 	public int join(UserVo vo) {
 		System.out.println("UserService.insert");
 		

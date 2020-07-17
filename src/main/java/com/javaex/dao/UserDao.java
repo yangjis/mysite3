@@ -11,7 +11,11 @@ public class UserDao {
 
 	@Autowired
 	SqlSession sqlSession;
-
+	
+	public UserVo idcheck(String id) {
+		return sqlSession.selectOne("user.idcheck", id); 
+	}
+	
 	public int insert(UserVo userVo) {
 		System.out.println("UserDao/join");
 		

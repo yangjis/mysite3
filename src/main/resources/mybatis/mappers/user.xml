@@ -3,6 +3,12 @@
 
 <mapper namespace="user">
 
+	<select id="idcheck" parameterType="String" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select no, id from users where id = #{id}
+		]]>
+	</select>
+
 	<insert id="insert" parameterType="com.javaex.vo.UserVo">
 		<![CDATA[
 			insert into users values (seq_users_no.nextval,

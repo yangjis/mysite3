@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>mysite3</title>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
 
@@ -45,7 +46,7 @@
 						<div class="form-group">
 							<label class="form-text" for="input-uid">아이디</label> 
 							<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
-							<button type="button" id="">중복체크</button>
+							<button type="button" id="btnIdCheck">중복체크</button>
 						</div>
 
 						<!-- 비밀번호 -->
@@ -101,5 +102,28 @@
 	<!-- //wrap -->
 
 </body>
+
+<script type="text/javascript">
+	$("#btnIdCheck").on("click", function(){
+		var uId = $("#input-uid").val();
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath }/user/idcheck?userId="+uId,		
+			type : "post",
+			//contentType : "application/json",
+			//data : {id: uId},
+			dataType : "json",
+			success : function(userVo){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(userVo.id);
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+				console.log("왜 실패 햇음?");
+			}
+		});
+		
+	});
+</script>
 
 </html>

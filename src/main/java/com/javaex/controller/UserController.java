@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.javaex.service.UserService;
@@ -18,6 +20,17 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	//ajax로 아이디 중복체크
+	@ResponseBody
+	@RequestMapping("/idcheck")
+	public UserVo idcheck(@RequestParam("userId") String id) {
+		System.out.println("userController/idcheck(ajax)");
+		
+		UserVo userVo = userService.idcheck(id);
+		System.out.println(userVo.toString());
+		return userVo;
+	}
 	
 	@RequestMapping("/joinForm")
 	public String joinForm() {

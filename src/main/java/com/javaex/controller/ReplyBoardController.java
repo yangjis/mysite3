@@ -36,6 +36,7 @@ public class ReplyBoardController {
 		model.addAttribute("bList", bList);
 		return "board/list";
 	}
+	
 	/*public String search(@RequestParam("keyword") String keyword,
 						 @RequestParam("pg") int pg,
 						 Model model) {

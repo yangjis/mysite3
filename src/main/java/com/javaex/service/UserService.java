@@ -12,8 +12,17 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public UserVo idcheck(String id) {
-		return userDao.idcheck(id);
+	public boolean idcheck(String id) {
+		UserVo userVo = userDao.idcheck(id);
+		boolean result = true;
+		
+		if(userVo == null) {
+			result = true;
+		}else {
+			result = false;
+		}
+		
+		return result;
 	}
 	
 	public int join(UserVo vo) {

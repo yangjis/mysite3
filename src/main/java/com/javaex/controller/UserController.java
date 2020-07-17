@@ -24,12 +24,11 @@ public class UserController {
 	//ajax로 아이디 중복체크
 	@ResponseBody
 	@RequestMapping("/idcheck")
-	public UserVo idcheck(@RequestParam("userId") String id) {
+	public boolean idcheck(@RequestParam("userId") String id) {
 		System.out.println("userController/idcheck(ajax)");
 		
-		UserVo userVo = userService.idcheck(id);
-		System.out.println(userVo.toString());
-		return userVo;
+		boolean result = userService.idcheck(id);
+		return result;
 	}
 	
 	@RequestMapping("/joinForm")

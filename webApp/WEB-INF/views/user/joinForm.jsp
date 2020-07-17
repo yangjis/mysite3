@@ -47,6 +47,7 @@
 							<label class="form-text" for="input-uid">아이디</label> 
 							<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
 							<button type="button" id="btnIdCheck">중복체크</button>
+							<span id = "checkMsg"></span>
 						</div>
 
 						<!-- 비밀번호 -->
@@ -106,16 +107,23 @@
 <script type="text/javascript">
 	$("#btnIdCheck").on("click", function(){
 		var uId = $("#input-uid").val();
+		
+		var userInfo = {userId: uId};
+		
 		$.ajax({
 			
-			url : "${pageContext.request.contextPath }/user/idcheck?userId="+uId,		
+			url : "${pageContext.request.contextPath }/user/idcheck?" 		
 			type : "post",
 			//contentType : "application/json",
 			//data : {id: uId},
 			dataType : "json",
-			success : function(userVo){
+			success : function(result){
 				/*성공시 처리해야될 코드 작성*/
-				console.log(userVo.id);
+				if(result == true){
+					$("#checkMsg").text("사용가능");
+				}else{
+					$("#checkMsg").html("<font color=red>사용불가</font>");
+				}
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);

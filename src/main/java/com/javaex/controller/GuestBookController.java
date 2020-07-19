@@ -51,4 +51,10 @@ public class GuestBookController {
 		
 		return "redirect:/guestBook/addList";
 	}
+	
+	@RequestMapping("/ajaxList")
+	public String asaxList() {
+		System.out.println("guest/ajaxList");
+		return "guestBook/ajaxAddList";
+	}
 }

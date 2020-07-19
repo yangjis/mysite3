@@ -20,7 +20,7 @@
 		<jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
 		<!-- //nav -->
 
-		<jsp:include page="/WEB-INF/views/include/aside.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/include/asideGuest.jsp"></jsp:include>
 		<!-- //aside -->
 
 		<div id="content">

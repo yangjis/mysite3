@@ -9,6 +9,7 @@
 				   content, 
 				   reg_date 
 			from guestBook
+			order by reg_date desc
 		]]>
 	</select>
 	

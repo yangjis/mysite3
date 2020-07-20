@@ -86,12 +86,10 @@
 			//data : {name: "홍길동"},
 			dataType : "json",
 			success : function(list){
-				console.log(list.length);
 				
-				for(var i = 0; i < list.length; i++){
-					render(list[i]);	
+				for(var i = (list.length-1); i => 0; i--){
+					render(list[i]);
 				}
-				
 				/*성공시 처리해야될 코드 작성*/
 			},
 			error : function(XHR, status, error) {
@@ -113,7 +111,7 @@
 		str += ' <tr>'
 		str += ' <td>'+list.no+'</td>'
 		str += ' <td>'+list.name+'</td>'
-		str += ' <td>'+list.regDate+'</td>'
+		str += ' <td>'+list.reg_date+'</td>'
 		str += ' <td><a href="/mysite3/book/deleteForm?no="'+list.no+'>[삭제]</a></td>'
 		str += ' </tr>';
 		str += ' <tr>'

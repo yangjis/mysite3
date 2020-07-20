@@ -30,7 +30,7 @@ public class ApiGuestbookController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/write", method=RequestMethod.POST)
-	public GuestBookVo write(@RequestBody GuestBookVo guestBookVo) {
+	public GuestBookVo write(@RequestBody GuestBookVo guestBookVo) {//json으로 데이터를 보낼 경우 RequestBody로 받아야함
 		System.out.println(guestBookVo.toString());
 		
 		GuestBookVo vo = guestBookService.ajaxAddGuest(guestBookVo);

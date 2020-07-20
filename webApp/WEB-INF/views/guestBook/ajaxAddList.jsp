@@ -85,7 +85,7 @@
 				<div class="modal-body">
 					<label>비밀번호</label>
 					<input type="password" name="modalPassword" id="modalPassword"><br>	
-					<input type="text" name="modalNo" value="" id="modalNo"> <br>	
+					<input type="hidden" name="modalNo" value="" id="modalNo"> <br>	
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -122,6 +122,43 @@
 		$("#modalPassword").val("");
 		
 		$("#delModal").modal();
+	});
+	
+	//모달창 삭제버튼 클릭할때
+	$("#btnDel").on("click",function(){
+		//이벤트 체크를 위한 콘솔로그
+		console.log("모달창 삭제 버튼 클릭");
+		
+		//데이터 수집
+		var password = $("#modalPassword").val();
+		var no = $("#modalNo").val();
+		
+		//데이터 전송 -> 그리기 작업
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath }/api/guestbook/delete",		
+			type : "post",
+			//contentType : "application/json",
+			data : {password: password, no: no},
+			dataType : "json",
+			success : function(count){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(count);
+				if(count == 1){
+					//모달창 닫고
+					$("#delModal").modal("hide");
+					//리스트에서 지우기
+					$("#t-" + no).remove();
+				}else{
+					//모달창 닫기
+					$("#delModal").modal("hide");
+				}
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
 	});
 	
 	//글쓰기버튼 클릭할때
@@ -161,42 +198,7 @@
 		});
 	});
 	
-	//모달창 삭제버튼 클릭할때
-	$("#btnDel").on("click",function(){
-		//이벤트 체크를 위한 콘솔로그
-		console.log("모달창 삭제 버튼 클릭");
-		
-		//데이터 수집
-		var password = $("#modalPassword").val();
-		var no = $("#modalNo").val();
-		
-		//데이터 전송 -> 그리기 작업
-		$.ajax({
-			
-			url : "${pageContext.request.contextPath }/api/guestbook/delete",		
-			type : "post",
-			//contentType : "application/json",
-			data : {password: password, no: no},
-			dataType : "json",
-			success : function(count){
-				/*성공시 처리해야될 코드 작성*/
-				console.log(count);
-				if(count == 1){
-					//모달창 닫고
-					$("#delModal").modal("hide");
-					//리스트에서 지우기
-					$("#t-" + no).remove();
-				}else{
-					//모달창 닫기
-					$("#delModal").modal("hide");
-				}
-				
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
-	});
+	
 	
 	
 	function fetchList(){

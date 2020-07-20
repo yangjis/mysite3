@@ -66,4 +66,5 @@ public class BoardService {
 	public int replyInsert(ReplyBoardVo replyVo) {
 		return boardDao.replyInsert(replyVo);
 	}
+	
 }

@@ -24,4 +24,24 @@
 		 	delete from guestbook where no = #{no} and password = #{password}
 		]]>
 	</delete>
+	
+	<insert id="ajaxAddGuest" parameterType="com.javaex.vo.GuestBookVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select seq_Guest_no.nextVal from dual
+		</selectKey>
+		<![CDATA[
+			insert into guestBook values(#{no}, #{name}, #{password}, #{content}, sysdate)
+		]]>
+	</insert>
+	
+	<select id="selectByNo" parameterType="int" resultType="com.javaex.vo.GuestBookVo">
+	<![CDATA[
+		select no, 
+			   name, 
+			   content, 
+			   reg_date 
+			from guestBook
+			where no = #{no}
+	]]>
+	</select>
 </mapper>

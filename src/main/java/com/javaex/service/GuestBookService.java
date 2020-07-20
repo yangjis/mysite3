@@ -15,19 +15,22 @@ public class GuestBookService {
 	GuestBookDao guestDao;
 	
 	public List<GuestBookVo> addList(){
-		System.out.println("guestService.addList");
 		List<GuestBookVo> gList = guestDao.addList();
 		
 		return gList;
 	}
 	
 	public int addGuestBook(GuestBookVo vo) {
-		System.out.println("gService.addGuestBook");
 		
 		return guestDao.addGuestBook(vo);
 	}
 	
 	public int delete(GuestBookVo vo) {
 		return guestDao.delete(vo);
+	}
+	
+	public GuestBookVo ajaxAddGuest(GuestBookVo vo) {
+		guestDao.ajaxAddGuest(vo);
+		return guestDao.selectByNo(vo.getNo());
 	}
 }

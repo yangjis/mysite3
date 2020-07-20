@@ -23,7 +23,6 @@ public class GuestBookController {
 	
 	@RequestMapping("/addList")
 	public String addList(Model model) {
-		System.out.println("guestController.addList");
 		List<GuestBookVo> gList = guestService.addList();
 		
 		model.addAttribute("gList", gList);
@@ -33,8 +32,6 @@ public class GuestBookController {
 	
 	@RequestMapping("/addGuestBook")
 	public String addGuestBook(@ModelAttribute GuestBookVo vo) {
-		System.out.println("gController.addGuestBook");
-		
 		guestService.addGuestBook(vo);
 		return "redirect:/guestBook/addList";
 	}
@@ -54,7 +51,6 @@ public class GuestBookController {
 	
 	@RequestMapping("/ajaxList")
 	public String asaxList() {
-		System.out.println("guest/ajaxList");
 		return "guestBook/ajaxAddList";
 	}
 }

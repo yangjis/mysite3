@@ -15,19 +15,25 @@ public class GuestBookDao {
 	SqlSession sqlSession;
 	
 	public List<GuestBookVo> addList(){
-		System.out.println("guestDao.addList");
 		List<GuestBookVo> gList = sqlSession.selectList("guest.addList");
 		
 		return gList;
 	}
 	
 	public int addGuestBook(GuestBookVo vo) {
-		System.out.println("guestDao.addGuestBook");
 		
 		return sqlSession.insert("guest.addGuestBook", vo);
 	}
 	
 	public int delete(GuestBookVo vo) {
 		return sqlSession.delete("guest.delete", vo);
+	}
+	
+	public void ajaxAddGuest(GuestBookVo vo) {
+		sqlSession.insert("guest.ajaxAddGuest", vo);
+	}
+	
+	public GuestBookVo selectByNo(int no) {
+		return sqlSession.selectOne("guest.selectByNo", no);
 	}
 }

@@ -17,4 +17,17 @@
 			where g.user_no = u.no(+)
 		]]>
 	</select>
+	
+	<insert id="insert" parameterType="com.javaex.vo.GalleryVo">
+		<![CDATA[
+			insert into gallery values(seq_gallery_no.nextval, 
+									   #{user_no}, 
+									   #{comments}, 
+									   #{filePath}, 
+									   #{orgName}, 
+									   #{saveName}, 
+									   #{fileSize}
+									   )
+		]]>
+	</insert>
 </mapper>	

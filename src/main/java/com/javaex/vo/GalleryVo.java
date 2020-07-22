@@ -7,11 +7,11 @@ public class GalleryVo {
 	private String filePath;
 	private String orgName;
 	private String saveName;
-	private String fileSize;
+	private long fileSize;
 	private String name;
 	
 	public GalleryVo() {}
-	public GalleryVo(int no, int user_no, String comments, String filePath, String orgName, String saveName, String fileSize, String name) {
+	public GalleryVo(int no, int user_no, String comments, String filePath, String orgName, String saveName, long fileSize, String name) {
 		this.no = no;
 		this.user_no = user_no;
 		this.comments = comments;
@@ -58,10 +58,10 @@ public class GalleryVo {
 	public void setSaveName(String saveName) {
 		this.saveName = saveName;
 	}
-	public String getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(String fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 	public String getName() {

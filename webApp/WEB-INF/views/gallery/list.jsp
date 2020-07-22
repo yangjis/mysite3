@@ -84,7 +84,7 @@
 					<h4 class="modal-title">이미지등록</h4>
 				</div>
 				
-				<form method="get" action="${pageContext.request.contextPath }/api/gallery/addGallery" enctype="multipart/form-data">
+				<form method="post" action="${pageContext.request.contextPath }/api/gallery/addGallery" enctype="multipart/form-data">
 					<div class="modal-body">
 						<div class="form-group">
 							<label class="form-text">글작성</label>
@@ -93,6 +93,8 @@
 						<div class="form-group">
 							<label class="form-text">이미지선택</label>
 							<input id="file" type="file" name="file" value="" >
+							<input type="hidden" name="user_no" value="${sessionScope.authUser.no}">
+							<input type="hidden" name="name" value="${sessionScope.authUser.name}">
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -178,10 +180,11 @@ function render(list){
 	var str="";
 	
 	str += "<li><div class='view'>";
-	str += "<img class='imgItem' src='" +list.filePath+ "'>";
+	str += "<img class='imgItem' src='${pageContext.request.contextPath }/upload/";
+	str +=list.saveName;
+	str +="'>";
 	str += "<div class='imgWriter'> 작성자: <strong>" +list.name+ "</strong></div>";
 	str += "</div></li>";
-	
 	$("#viewArea").prepend(str);
 	
 };

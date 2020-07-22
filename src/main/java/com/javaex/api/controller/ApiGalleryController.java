@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,20 +31,17 @@ public class ApiGalleryController {
 	public List<GalleryVo> list(){
 		System.out.println("api/gallery/list");
 		List<GalleryVo> list = galleryService.list();
-		
 		return list;
 	}
 	
-	@RequestMapping(value = "/addGallery", method=RequestMethod.GET)
+	@RequestMapping("/addGallery")
 	public String addGallery(@RequestParam("file") MultipartFile file,
-						  @RequestParam("comments") String comments,
+						  @ModelAttribute GalleryVo galleryVo,
 						  Model model) {
 		System.out.println("api/gallery/addGallery");
 		
-		String saveName = fileUploadService.restore(file);
-		model.addAttribute("saveName", saveName);
-		
-		return "redirect:gallery/list";
+		galleryService.insert(galleryVo, file);
+		return "redirect:/gallery/list";
 	}
 	
 

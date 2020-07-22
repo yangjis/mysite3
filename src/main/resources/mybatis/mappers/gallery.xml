@@ -30,4 +30,17 @@
 									   )
 		]]>
 	</insert>
+	
+	<select id="getSaveName" parameterType="int" resultType="com.javaex.vo.GalleryVo">
+	<![CDATA[
+		select savename,comments,user_no, no from gallery where no = #{no}
+	]]>
+	</select>
+	
+	<delete id="delete" parameterType="com.javaex.vo.GalleryVo"  >
+	<![CDATA[
+		delete from gallery where user_no = #{user_no} and no = #{no}
+	]]>
+	</delete>
+	
 </mapper>	

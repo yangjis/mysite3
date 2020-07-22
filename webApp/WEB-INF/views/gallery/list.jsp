@@ -119,19 +119,21 @@
 				</div>
 				<div class="modal-body">
 					
-					<div class="formgroup" >
-						<img id="viewModelImg" src =""> <!-- ajax로 처리 : 이미지출력 위치-->
+					<div class="formgroup" id = "img">
+						 <img id='viewModelImg' src="" ><!-- ajax로 처리 : 이미지출력 위치-->
 					</div>
 					
 					<div class="formgroup">
-						<p id="viewModelContent"></p>
+						<p id="viewModelContent" >코멘트</p>
 					</div>
 					
 				</div>
-				<form method="" action="">
-					<div class="modal-footer">
+				<form method="get" action="${pageContext.request.contextPath }/gallery/delGallery" >
+					<div class="modal-footer" >
+					<input type = "hidden" value="${authUser.no }" id= "user_no">
+					<input id="no" type = "hidden" value="" name="no">
+					<button type="submit" class="btn btn-danger" id="btnDel">삭제</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
 				</div>
 				
 				
@@ -152,8 +154,49 @@ $(document).ready(function(){
 $("#btnImgUpload").on("click", function(){
 	console.log("클릭했는감?");
 	$("#addModal").modal();
+	
+
 });
 
+$("#viewArea").on("click", "img",function(){
+	console.log("그림을 클릭했는가?");
+	
+	
+	var no = $(this).data("no");
+	console.log(no);
+	
+	var user_no = $("#user_no").val();
+	
+	$.ajax({
+			
+			url : "${pageContext.request.contextPath }/api/gallery/getSaveName",		
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(no),
+			dataType : "json",
+			success : function(GalleryVo){
+				console.log(GalleryVo);
+				console.log(GalleryVo.saveName);
+				$("#viewModelImg").attr("src", "${pageContext.request.contextPath }/upload/" + GalleryVo.saveName)
+				$("#viewModelContent").text(GalleryVo.comments);
+				
+				$("#no").attr("value", GalleryVo.no);
+				$("#viewModal").modal();
+				
+				if(user_no != GalleryVo.user_no){
+					$("#btnDel").hide();
+				}
+					
+				
+				
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+		}
+	});
+	
+});
 
 function fetchList(){
 	$.ajax({
@@ -182,7 +225,7 @@ function render(list){
 	str += "<li><div class='view'>";
 	str += "<img class='imgItem' src='${pageContext.request.contextPath }/upload/";
 	str +=list.saveName;
-	str +="'>";
+	str +="' data-no="+list.no+">";
 	str += "<div class='imgWriter'> 작성자: <strong>" +list.name+ "</strong></div>";
 	str += "</div></li>";
 	$("#viewArea").prepend(str);

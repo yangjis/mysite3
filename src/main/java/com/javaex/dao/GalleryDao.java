@@ -22,4 +22,12 @@ public class GalleryDao {
 	public void insert(GalleryVo galleryVo) {
 		sqlSession.insert("gallery.insert",galleryVo);
 	}
+	
+	public GalleryVo getSaveName(int no) {
+		return sqlSession.selectOne("gallery.getSaveName", no);
+	}
+	
+	public int delGallery(GalleryVo galleryVo) {
+		return sqlSession.delete("gallery.delete", galleryVo);
+	}
 }

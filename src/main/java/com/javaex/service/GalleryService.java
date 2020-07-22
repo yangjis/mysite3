@@ -25,7 +25,6 @@ public class GalleryService {
 	public List<GalleryVo> list() {
 		List<GalleryVo> list = galleryDao.list();
 		for(GalleryVo vo: list) {
-			System.out.println("서비스 Vo: " + vo);
 		}
 		return list;
 	}
@@ -70,4 +69,15 @@ public class GalleryService {
 		galleryVo.setOrgName(orgName);
 		galleryDao.insert(galleryVo);
 	}
+	
+	public GalleryVo getSaveName(int no) {
+		GalleryVo vo = galleryDao.getSaveName(no);
+		return vo;
+	}
+	
+	public void delGallery(GalleryVo galleryVo) {
+		int count = galleryDao.delGallery(galleryVo);
+		
+	}
+	
 }

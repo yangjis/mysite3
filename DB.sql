@@ -31,7 +31,20 @@ create table replyboard(
     CONSTRAINT c_replyboard_fk foreign key(user_no)
     REFERENCES users(no)
 );
+create table gallery(
+    no          number,
+    user_no     number,
+    comments    varchar2(1000),
+    filePath    varchar2(500),
+    orgName     varchar2(200),
+    saveName    varchar2(500),
+    fileSize    number,
+    PRIMARY key (no),
+    CONSTRAINT c_user_fk foreign key(user_no)
+    REFERENCES users(no)
+);
 
+CREATE SEQUENCE seq_gallery_no increment by 1 start with 1;
 create SEQUENCE SEQ_GUEST_NO increment by 1 start with 1;
 create sequence seq_rboard_id increment by 1 start with 1;
 create sequence seq_group_no increment by 1 start with 1;

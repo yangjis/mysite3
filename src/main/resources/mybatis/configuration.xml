@@ -12,5 +12,6 @@
         <mapper resource="mybatis/mappers/guest.xml" />
         <mapper resource="mybatis/mappers/board.xml" />
         <mapper resource="mybatis/mappers/replyBoard.xml" />
+        <mapper resource="mybatis/mappers/gallery.xml" />
     </mappers>
 </configuration>

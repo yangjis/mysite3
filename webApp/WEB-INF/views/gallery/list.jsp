@@ -44,14 +44,14 @@
 			</div>
 			<!-- //content-head -->
 
-
 			<div id="gallery">
 				<div id="list">
 			
 					
+					<c:if test="${!empty authUser.no}">	
 						<button id="btnImgUpload">이미지올리기</button>
 						<div class="clear"></div>
-
+					</c:if>
 			
 					<ul id="viewArea">
 						

@@ -76,8 +76,9 @@ public class GalleryService {
 	}
 	
 	public void delGallery(GalleryVo galleryVo) {
+		System.out.println(galleryVo.toString());
 		int count = galleryDao.delGallery(galleryVo);
-		
+		System.out.println("서비스 삭제: " + count);
 	}
 	
 }

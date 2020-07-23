@@ -130,8 +130,8 @@
 				</div>
 				<form method="get" action="${pageContext.request.contextPath }/gallery/delGallery" >
 					<div class="modal-footer" >
-					<input type = "hidden" value="${authUser.no }" id= "user_no">
 					<input id="no" type = "hidden" value="" name="no">
+					<input type = "hidden" value="${authUser.no }" name="user_no">
 					<button type="submit" class="btn btn-danger" id="btnDel">삭제</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 				</div>
@@ -165,8 +165,6 @@ $("#viewArea").on("click", "img",function(){
 	var no = $(this).data("no");
 	console.log(no);
 	
-	var user_no = $("#user_no").val();
-	
 	$.ajax({
 			
 			url : "${pageContext.request.contextPath }/api/gallery/getSaveName",		
@@ -183,7 +181,7 @@ $("#viewArea").on("click", "img",function(){
 				$("#no").attr("value", GalleryVo.no);
 				$("#viewModal").modal();
 				
-				if(user_no != GalleryVo.user_no){
+				if("${authUser.no }" != GalleryVo.user_no){
 					$("#btnDel").hide();
 				}
 					
@@ -228,7 +226,7 @@ function render(list){
 	str +="' data-no="+list.no+">";
 	str += "<div class='imgWriter'> 작성자: <strong>" +list.name+ "</strong></div>";
 	str += "</div></li>";
-	$("#viewArea").prepend(str);
+	$("#viewArea").append(str);
 	
 };
 

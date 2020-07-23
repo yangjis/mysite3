@@ -33,6 +33,7 @@ create table replyboard(
 );
 create table gallery(
     no          number,
+    reg_date	date,
     user_no     number,
     comments    varchar2(1000),
     filePath    varchar2(500),

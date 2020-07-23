@@ -9,9 +9,10 @@ public class GalleryVo {
 	private String saveName;
 	private long fileSize;
 	private String name;
+	private String reg_date;
 	
 	public GalleryVo() {}
-	public GalleryVo(int no, int user_no, String comments, String filePath, String orgName, String saveName, long fileSize, String name) {
+	public GalleryVo(int no, int user_no, String comments, String filePath, String orgName, String saveName, long fileSize, String name, String reg_date) {
 		this.no = no;
 		this.user_no = user_no;
 		this.comments = comments;
@@ -20,6 +21,7 @@ public class GalleryVo {
 		this.saveName = saveName;
 		this.fileSize = fileSize;
 		this.name = name;
+		this.reg_date = reg_date;
 	}
 	
 	public int getNo() {
@@ -70,10 +72,18 @@ public class GalleryVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+	
 	@Override
 	public String toString() {
 		return "GalleryVo [no=" + no + ", user_no=" + user_no + ", comments=" + comments + ", filePath=" + filePath
-				+ ", orgName=" + orgName + ", saveName=" + saveName + ", fileSize=" + fileSize + ", name=" + name + "]";
+				+ ", orgName=" + orgName + ", saveName=" + saveName + ", fileSize=" + fileSize + ", name=" + name
+				+ ", reg_date=" + reg_date + "]";
 	}
-	
+
 }

@@ -4,7 +4,8 @@
 	
 	<select id="list" resultType="com.javaex.vo.GalleryVo">
 		<![CDATA[
-			select g.no no, 
+			select g.no no,
+				   g.reg_date reg_date, 
 				   g.user_no user_no, 
 				   g.comments comments, 
 				   g.filePath filePath, 
@@ -15,12 +16,14 @@
 			from gallery g, 
 				 users u 
 			where g.user_no = u.no(+)
+			order by reg_date asc
 		]]>
 	</select>
 	
 	<insert id="insert" parameterType="com.javaex.vo.GalleryVo">
 		<![CDATA[
-			insert into gallery values(seq_gallery_no.nextval, 
+			insert into gallery values(seq_gallery_no.nextval,
+									   sysdate, 
 									   #{user_no}, 
 									   #{comments}, 
 									   #{filePath}, 
